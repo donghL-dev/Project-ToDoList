@@ -62,6 +62,12 @@ Prjoect - To Do List
 
   * IntelliJ IDEA 와 MySQL [연동](./image/3.png)
 
+### project-day-3
+
+  * View 수정 및 업데이트.
+
+ 
+
    
 
 
