@@ -66,6 +66,24 @@ Prjoect - To Do List
 
   * View 수정 및 [업데이트](./image/4.png)
 
+### project-day-4
+
+  * View 수정 및 업데이트
+
+    * css 옵션 추가 및 헤더와 푸터 생성.
+
+### project-day-5
+
+  * to do list 목록의 CRUD를 위한 ToDoListRestController 클래스 생성.
+
+    * to do list 목록의 생성을 위한 값을 View에서 Input을 통해 받아옴.
+
+    * 받아온 Input값을 postToDoList 메소드를 통해서 및 PostMapping으로 url 매핑 처리후 ToDoListService에서 로직 처리.
+
+    * ToDoListService에서 로직을 통해 DB에 값 저장 하고 View가 Redirect 된 후 저장된 목록 출력.
+
+
+
  
 
    
