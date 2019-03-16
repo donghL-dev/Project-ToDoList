@@ -82,7 +82,7 @@ Prjoect - To Do List
 
     * 받아온 Input값을 postToDoList 메소드를 통해서 및 PostMapping으로 url 매핑 처리후 ToDoListService에서 로직 처리.
 
-    * ToDoListService에서 로직을 통해 DB에 값 저장 하고 View가 Redirect 된 후 저장된 목록 출력.
+    * ToDoListService에서 로직을 통해 DB에 값을 저장 한 뒤 View가 Redirect 된 후 저장된 목록 출력.
 
 
 
