@@ -70,7 +70,9 @@ Prjoect - To Do List
 
   * View 수정 및 업데이트
 
-    * css 옵션 추가 및 헤더와 푸터 생성.
+    * css 설정 값 추가 및 수정 
+    
+    * Header와 Footer 생성.
 
 ### project-day-5
 
