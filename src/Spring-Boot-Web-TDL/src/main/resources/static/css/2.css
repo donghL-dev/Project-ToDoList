@@ -1,15 +1,80 @@
 
 /* Basic Style */
 body {
-    background: #fff;
     color: #333;
     font-family: Lato, sans-serif;
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    background-color: #f6f8fa;
 }
+
+html{
+    position: relative;
+    min-height: 100%;
+}
+
+#header{
+    background-color:#ccd7ff;
+    height:80px;
+    width: 100%;
+    clear:both;
+    position: absolute;
+    margin-right:-50px;
+}
+#left{
+    background-color:#ffdbcc;
+    height:80%;
+    width:20%;
+    float:left;
+}
+
+#right{
+    background-color:#CCFFCC;
+    height:80%;
+    width:80%;
+    float:right;
+}
+
+#footer{
+    position: marker;
+    background-color: #24292E;
+    width:100%;
+
+    clear:both;
+}
+
+footer{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: #24292e;
+}
+
+.footer_title{
+    vertical-align: center;
+    text-align: center;
+    padding: 0.5%;
+    color: whitesmoke;
+    font-size: 20px;
+}
+
 .container {
     display: block;
-    width: 900px;
+    width: 750px;
     margin: 100px auto 0;
 }
+
+#new-li {
+    display: block;
+    list-style-type: disc;
+    padding: 0;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
 ul {
     margin: 0;
     padding: 0;
@@ -48,6 +113,17 @@ label[for='new-task'] {
     margin: 0;
     text-transform: uppercase;
 }
+
+.textarea_test {
+    resize:none;
+    line-height:30px;
+    width:100%;
+    overflow-y:hidden;
+    height:30px;
+    border:1px solid #ccc;
+}
+
+
 input[type="text"] {
     margin: 0;
     font-size: 18px;

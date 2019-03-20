@@ -16,6 +16,6 @@ public class ToDoListService {
     }
 
     public List<ToDoList> findToDoList(){
-        return toDoListRepository.findAll();
+        return toDoListRepository.findAllByOrderByIdx();
     }
 }
