@@ -111,7 +111,6 @@ Prjoect - To Do List
     * Password(비밀번호) -> String
   
   * 기존의 ToDoList 클래스에 User 컬럼 추가.
-
     ```java
     @OneToOne(fetch = FetchType.LAZY)
     private User user;
