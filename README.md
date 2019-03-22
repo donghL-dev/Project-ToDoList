@@ -98,7 +98,7 @@ Prjoect - To Do List
 
 ### project-day-7
 
-  * User 모델과 ToDoList 모델 1 : 1 관계 설장.
+  * User 모델과 ToDoList 모델 1 : 1 관계 설정.
 
   * User 도메인 클래스 생성
 
