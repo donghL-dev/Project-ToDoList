@@ -180,50 +180,9 @@ Prjoect - To Do List
 
     * OwnerShip을 가지고 있지 않은 모델 객체에는 가지고 있는 모델 객체를 Collection 자료형으로 선언한다.
 
-  * ToDoList 모델에 `@ManyToOne` 어노테이션을 사용하고, User 모델에 `@OneToMany` 객체를 이용해서 N : 1 양방향 관계로 설정.
+  * ToDoList 모델에 `@ManyToOne` 어노테이션을 사용하고, User 모델에 `@OneToMany` 어노테이션을 사용해서 N : 1 양방향 관계로 설정.
 
-  * 테이블 및 코드 [확인](https://github.com/dongh9508/Project-ToDoList/tree/master/image/)
-
-    * ToDoList 모델에 `@ManyToOne` 어노테이션을 사용할 경우.
-
-      * ToDoList 모델이 Forgin Key로 User를 포함한다.
-
-        * ToDoList 모델의 테이블.
-
-          |idx|completedDate|createdDate|description|status|user_idx|
-          |:---:|:---:|:---:|:---:|:---:|:---:|
-
-          ```java
-          public class ToDoList {
-
-            ...
-            ...
-
-            @ManyToOne
-            private User user;
-
-          }
-          ```
-
-
-      * User 모델의 ToDoList 객체를 `@OneToMany`로 매핑을 해주고, mappedby속성으로 ToDoList 모델의 User 필드의 변수명을 준다.
-        
-        * User 모델의 테이블
-
-        |idx|email|name|password|
-        |:---:|:---:|:---:|:---:|
-
-        ```java
-        public class User {
-
-          ...
-          ...
-
-          @OneToMany(mappedby = "user")
-          private List<ToDoList> todolists;
-
-        }
-        ```
+  * 테이블 및 코드 [확인](https://github.com/dongh9508/Project-ToDoList/tree/master/image/RelationShip)
 
 
 
