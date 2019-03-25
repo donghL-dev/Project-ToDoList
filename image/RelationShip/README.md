@@ -64,6 +64,8 @@ ToDoList 모델과 User 모델의 관계성 설정
       |...|...|...|...|...|
       |15|time|time|내용 15|false|1|
 
+
+
 ### User 모델에 `@ManyToOne` 어노테이션을 사용할 경우.
 
   * ToDoList 모델의 User 객체를 `@OneToMany`로 매핑을 해주고, mappedby 속성으로 User 모델의 ToDoList 필드의 변수명을 준다.
