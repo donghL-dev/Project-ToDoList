@@ -3,7 +3,7 @@ ToDoList 모델과 User 모델의 관계성 설정
 
 ### ToDoList 모델에 `@ManyToOne` 어노테이션을 사용할 경우.
 
-  * ToDoList 모델이 Forgin Key로 User를 포함한다.
+  * ToDoList 모델이 Foreign Key로 User를 포함한다.
 
     * ToDoList 모델의 DB의 컬럼들.
 
@@ -42,7 +42,7 @@ ToDoList 모델과 User 모델의 관계성 설정
       }
       ```
 
-  * ToDoList 모델이 Forgin Key로 User 모델을 소유할 경우.
+  * ToDoList 모델이 Foreign Key로 User 모델을 소유할 경우.
 
     * 현재 User가 ToDoList를 등록할 때마다, ToDoList 테이블에 현재 User의 Idx만 저장되므로, ToDoList가 등록되도 유일한 User 정보가 User 테이블에 유지된다.
 
@@ -87,7 +87,7 @@ ToDoList 모델과 User 모델의 관계성 설정
       }
        ```
 
-  * User 모델이 Forgin Key로 ToDoList를 포함한다.
+  * User 모델이 Foreign Key로 ToDoList를 포함한다.
 
     * User 모델의 DB의 컬럼들.
 
@@ -106,7 +106,7 @@ ToDoList 모델과 User 모델의 관계성 설정
       }
       ```
   
-  * User 모델이 Forgin Key로 ToDoList 모델을 소유할 경우.
+  * User 모델이 Foreign Key로 ToDoList 모델을 소유할 경우.
 
     * 현재 User의 ToDoList를 등록할 때마다, User 테이블에 to_do_list idx만 다른 값으로 테이블이 늘어나게 되면서, 중복값이 늘어난다.
 
