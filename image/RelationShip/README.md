@@ -116,7 +116,7 @@ ToDoList 모델과 User 모델의 관계성 설정
       |:---:|:---:|:---:|:---:|:---:|
       |1|user1@gmail.com|user1|1234|1|
       |2|user2@gmail.com|user2|12345|2|
-      |1|user1@gmail.com|user1|12345|3|
+      |1|user1@gmail.com|user1|1234|3|
       |...|...|...|...|...|
       |3|user3@gmail.com|user3|123456|15|
 
