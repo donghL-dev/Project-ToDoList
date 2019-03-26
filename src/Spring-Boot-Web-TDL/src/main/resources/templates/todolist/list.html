@@ -1,28 +1,27 @@
 <html>
 <head>
     <title>Todo App</title>
-    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+     <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/2.css}"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-<div id="header" style="text-align: center; background-color: #24292E; margin: 0 auto">
-    <h1 style="color:#FFFFFF" onclick="move()">To Do List</h1>
-</div>
-<br><br>
+
+<div th:replace="layout/header::header"></div>
+
 <input id="todolist_idx" type="hidden" th:value="${todolist?.idx}"/>
 <input id="todolist_create_date" type="hidden" th:value="${todolist?.createdDate}"/>
-<div class="container" style="margin-top: 0px; margin-bottom: 80px">
+<div class="container" style="margin-top: 0px">
     <p style="margin-top: 0px">
         <label for="new-task">ADD To Do List</label>
         <textarea class="mdl-textfield__input" id="new-task" th:text="${todolist?.description}" placeholder="to do.." onkeyup="this.style.height='26px'; this.style.height = this.scrollHeight + 'px';" style="margin-top: 10px; margin-left: 15px; width: 500px"></textarea>
-        <button th:if="!${todolist?.idx}" type="button" id="insert" ><i class="material-icons">add_circle_outline</i></button>
+        <button type="button" id="insert" ><i class="material-icons">add_circle_outline</i></button>
     </p>
 
     <h3>To do</h3>
-    <ul th:class="${todoList.idx}" th:each="todoList : ${todoList}" id="incomplete-tasks">
+    <ul th:class="${todoList.idx}" th:each="todoList : ${todoList}" id="incomplete-tasks" style="">
         <li th:if="${todoList.status == false}">
             <input type="checkbox" class="checkbox1"  th:value="${todoList.idx}">
             <h4 th:value="${todoList.idx}" style="width: 600px;" th:href="'/todolist?idx='+${todoList.idx}" th:text="${todoList.description}" ></h4>
@@ -52,93 +51,12 @@
         </li>
     </ul>
 
-<footer style="">
-    <div class="footer_title">
-        <p> Copyright@2019 Donghun Lim, All Rights Reserved.</p>
-    </div>
-</footer>
+    <div th:replace="layout/footer::footer"></div>
+
 
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/bootstrap.js}"></script>
-<script th:src="@{/js/2.js}"></script>
-<script th:if="!${todolist?.idx}">
-    $('#insert').click(function () {
-        var jsonData = JSON.stringify({
-            description: $('#new-task').val(),
-            status: false
-        });
-        $.ajax({
-            url: "/todolist",
-            type: "POST",
-            data: jsonData,
-            contentType: "application/json",
-            dataType: "json",
-            success: function () {
-                location.href = '/list';
-            },
-            error: function () {
-                alert('저장 실패!');
-            }
-        });
-    });
-</script>
-<script>
-    $('.delete').click(function () {
-        $.ajax({
-            url: "/todolist/" + $(this).val(),
-            type: "DELETE",
-            success: function () {
-                location.href = '/list';
-            },
-            error: function () {
-                alert('삭제 실패!');
-            }
-        });
-    });
-</script>
-<script>
-    $('.checkbox1').change(function () {
-        if($('.checkbox1').is(":checked")) {
-            console.log("1111111111");
-            var jsonData = JSON.stringify({
-                status: true
-            });
-            $.ajax({
-                url: "/todolist/status/" + $(this).val(),
-                type: "PUT",
-                data: jsonData,
-                contentType: "application/json",
-                dataType: "json",
-                success: function () {
-                    location.href = '/list';
-                },
-                error: function () {
-                    alert('완료 실패!');
-                }
-            });
-        }
-    });
-
-    $('.checkbox2').change(function () {
-        var jsonData2 = JSON.stringify({
-            status: false
-        });
-        $.ajax({
-            url: "/todolist/status/" + $(this).val(),
-            type: "PUT",
-            data: jsonData2,
-            contentType: "application/json",
-            dataType: "json",
-            success: function () {
-                location.href = '/list';
-            },
-            error: function () {
-                alert('완료 실패!');
-            }
-        });
-    });
-
-</script>
+<script th:src="@{/js/2.js?ver=1}"></script>
 
 </body>
 </html>

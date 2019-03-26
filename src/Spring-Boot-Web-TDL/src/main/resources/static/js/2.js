@@ -1,7 +1,4 @@
 
-
-
-
 var content;
 var days;
 var id;
@@ -20,6 +17,79 @@ $('.edit').click(function () {
     }
 });
 
+$('#insert').click(function () {
+    var jsonData = JSON.stringify({
+        description: $('#new-task').val(),
+        status: false
+    });
+    $.ajax({
+        url: "/todolist",
+        type: "POST",
+        data: jsonData,
+        contentType: "application/json",
+        dataType: "json",
+        success: function () {
+            location.href = '/list';
+        },
+        error: function () {
+            alert('저장 실패!');
+        }
+    });
+});
+
+$('.delete').click(function () {
+    $.ajax({
+        url: "/todolist/" + $(this).val(),
+        type: "DELETE",
+        success: function () {
+            location.href = '/list';
+        },
+        error: function () {
+            alert('삭제 실패!');
+        }
+    });
+});
+
+$('.checkbox1').change(function () {
+    if($('.checkbox1').is(":checked")) {
+        console.log("1111111111");
+        var jsonData = JSON.stringify({
+            status: true
+        });
+        $.ajax({
+            url: "/todolist/status/" + $(this).val(),
+            type: "PUT",
+            data: jsonData,
+            contentType: "application/json",
+            dataType: "json",
+            success: function () {
+                location.href = '/list';
+            },
+            error: function () {
+                alert('완료 실패!');
+            }
+        });
+    }
+});
+
+$('.checkbox2').change(function () {
+    var jsonData2 = JSON.stringify({
+        status: false
+    });
+    $.ajax({
+        url: "/todolist/status/" + $(this).val(),
+        type: "PUT",
+        data: jsonData2,
+        contentType: "application/json",
+        dataType: "json",
+        success: function () {
+            location.href = '/list';
+        },
+        error: function () {
+            alert('완료 실패!');
+        }
+    });
+});
 
 function update() {
     $('.edit').attr("name","edit");
@@ -45,12 +115,12 @@ function move() {
     location.href = "/list";
 }
 
+
 function resize(obj) {
     console.log("AAAAAA");
     obj.style.height = "1px";
     obj.style.height = (12+obj.scrollHeight)+"px";
 }
-
 
 $(".mdl-textfield__input").on('keydown keyup', function () {
     $(this).height(1).height( $(this).prop('scrollHeight')+12 );

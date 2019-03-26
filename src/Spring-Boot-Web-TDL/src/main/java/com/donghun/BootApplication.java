@@ -1,7 +1,9 @@
 package com.donghun;
 
 import com.donghun.domain.ToDoList;
+import com.donghun.domain.User;
 import com.donghun.repository.ToDoListRepository;
+import com.donghun.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,29 +19,6 @@ public class BootApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BootApplication.class, args);
-    }
-
-    @Bean
-    public CommandLineRunner runner(ToDoListRepository toDoListRepository) throws Exception {
-        return (args) -> {
-
-
-
-            IntStream.rangeClosed(1, 5).forEach(index -> toDoListRepository.save(ToDoList.builder()
-                    .description("스프링 부트로 구현하는 To Do List " + index)
-                    .status(false)
-                    .createdDate(LocalDateTime.now())
-                    .build())
-            );
-
-            IntStream.rangeClosed(1, 5).forEach(index -> toDoListRepository.save(ToDoList.builder()
-                    .description("완료된 항목" + index)
-                    .status(true)
-                    .createdDate(LocalDateTime.now())
-                    .completedDate(LocalDateTime.now())
-                    .build())
-            );
-        };
     }
 
     @Bean

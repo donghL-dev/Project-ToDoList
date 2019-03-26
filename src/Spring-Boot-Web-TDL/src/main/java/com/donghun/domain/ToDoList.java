@@ -6,8 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.awt.print.Book;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table
@@ -33,15 +37,16 @@ public class ToDoList implements Serializable {
     @Column
     private LocalDateTime completedDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private User user;
 
     @Builder
-    public ToDoList(String description, Boolean status, LocalDateTime createdDate, LocalDateTime completedDate) {
+    public ToDoList(String description, Boolean status, LocalDateTime createdDate, LocalDateTime completedDate, User user) {
         this.description = description;
         this.status = status;
         this.createdDate = createdDate;
         this.completedDate = completedDate;
+        this.user = user;
     }
 
     public void setCreatedDateNow() {

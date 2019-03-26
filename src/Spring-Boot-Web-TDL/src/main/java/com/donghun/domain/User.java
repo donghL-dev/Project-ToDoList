@@ -1,8 +1,6 @@
 package com.donghun.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -10,12 +8,16 @@ import javax.persistence.Table;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 @Table
 @Getter
+@Setter
 @NoArgsConstructor
+@ToString
 public class User {
 
     @Id
@@ -32,11 +34,20 @@ public class User {
     @Column
     private String email;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<ToDoList> toDoLists = new ArrayList<>();
+
     @Builder
-    public User(String name, String password, String email) {
+    public User(String name, String password, String email, List<ToDoList> toDoLists) {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.toDoLists = toDoLists;
+    }
+
+    public void add(ToDoList toDoList) {
+        toDoList.setUser(this);
+        this.toDoLists.add(toDoList);
     }
 
 }

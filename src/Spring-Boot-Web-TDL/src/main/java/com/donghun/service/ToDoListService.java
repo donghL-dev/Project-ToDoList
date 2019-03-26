@@ -1,6 +1,7 @@
 package com.donghun.service;
 
 import com.donghun.domain.ToDoList;
+import com.donghun.domain.User;
 import com.donghun.repository.ToDoListRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,9 @@ public class ToDoListService {
         this.toDoListRepository = toDoListRepository;
     }
 
-    public List<ToDoList> findToDoList(){
-        return toDoListRepository.findAllByOrderByIdx();
+    public List<ToDoList> findToDoList(User user){
+
+        return toDoListRepository.findByUserOrderByIdx(user);
+
     }
 }

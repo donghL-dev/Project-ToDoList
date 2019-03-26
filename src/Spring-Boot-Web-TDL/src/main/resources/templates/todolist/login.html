@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+
+        body::after{ content:''; display:block; height:100px; }
+
+        body {
+            color: #333;
+            font-family: Lato, sans-serif;
+            position: relative;
+            margin: 0;
+            min-height:100%;
+            overflow: auto;
+            padding: 0;
+            background-color: #f6f8fa;
+        }
+
+        html{
+            height: 100%;
+        }
+
+        header{
+            display: block;
+            background-color: #24292e;
+        }
+        .headerTitle{
+            vertical-align: center;
+            font-family: 'Merriweather', serif;
+            text-align: center;
+            color: white;
+            font-size: 42px;
+            padding: 1.5%;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: white;
+            background-color: #24292e;
+        }
+
+        .footer_title{
+            vertical-align: center;
+            text-align: center;
+            color: whitesmoke;
+            font-size: 20px;
+        }
+
+        #lgoinform {border: 3px solid #f1f1f1;}
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #f44336;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 25%;
+            height: 25%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+            .cancelbtn {
+                width: 100%;
+            }
+        }
+
+        #loginbox {
+            width: 35%;
+            height: 30%;
+            margin: auto;
+        }
+
+        .footer{position:absolute;bottom:0;width:100%;height:60px;background-color:#f5f5f5;padding:20px 0;text-align:center;box-sizing:border-box;color:#c0c0c0;}
+
+    </style>
+</head>
+<body>
+
+<div th:replace="layout/header::header"></div>
+
+<div style="margin-top: 5%; margin-bottom: 5%">
+    <div id="loginbox">
+        <div id="lgoinform">
+            <div class="imgcontainer">
+                <img th:src="@{/images/avatar.png}" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input id="username" type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input id="password" type="password" placeholder="Enter Password" name="psw" required>
+
+                <button id="login" type="button">Login</button>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" class="cancelbtn" onclick="moveRegister()">Register</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer style="height: 6%">
+    <div class="footer_title" style="">
+        <p> Copyright@2019 Donghun Lim, All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script>
+    function moveRegister() {
+        location.href = "/register";
+    }
+</script>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script>
+    $('#login').click(function () {
+        var jsonData = JSON.stringify({
+            name: $('#username').val(),
+            password: $('#password').val()
+        });
+        $.ajax({
+            url: "/login",
+            type: "POST",
+            data: jsonData,
+            contentType: "application/json",
+            dataType: "json",
+            success: function () {
+                alert("로그인 성공");
+                $.ajax({
+                    url: "/todolist/idxrequest",
+                    type: "POST",
+                    data: jsonData,
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function () {
+                        location.href = '/list';
+                    },
+                    error: function () {
+                        alert("값 전달 실패");
+                    }
+                });
+            },
+            error: function (request) {
+                alert(request.responseText);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

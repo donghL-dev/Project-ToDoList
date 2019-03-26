@@ -1,31 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <!--header-->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row">
-                <!-- Title -->
-                <div class="in">
-                    <div style="padding-left: 35px;">
-                        <h2 class="header_font">To Do List</h2>
-                    </div>
-                </div>
-                <!-- Add spacer, to align navigation to the right -->
-                <div class="mdl-layout-spacer"><h4></h4></div>
-                <!-- Navigation. We hide it in small screens. -->
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                                    mdl-textfield--floating-label mdl-textfield--align-right"></div>
-                <div class="material-icons mdl-badge mdl-badge--overlap">account_box</div>
-                <button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
-                    <i class="material-icons">reorder</i>
-                </button>
-                <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-                    <li class="mdl-menu__item" onclick="location.href='index.html'"></li>
-                    <li class="mdl-menu__item" onclick="location.href='page4.html'"></li>
-                </ul>
-            </div>
+    <div th:fragment="header">
+        <header>
+            <a href="/logout" style="text-decoration: none"><div class="headerTitle">To Do List</div></a>
         </header>
-        <!-- <div class="mdl-layout__drawer"><img class="menu-bar" src="img/bluecouch.png"/></div> -->
     </div>
     <!--/header-->
 </html>
