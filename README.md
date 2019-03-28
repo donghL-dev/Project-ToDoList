@@ -268,4 +268,4 @@ Prjoect - To Do List
 
           * configureGlobal() 메소드의 인메모리 인증 코드 부분의 password 부분을 인코딩 해주지 않아서 에러가 일어남.
 
-            * PasswordEncoder 클래스를 이용해서 인코딩 에러가 일어나는 부분을 해결.
+          * PasswordEncoder 클래스를 이용해서 인코딩 에러가 일어나는 부분을 해결.
