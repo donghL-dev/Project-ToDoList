@@ -25,7 +25,8 @@ Prjoect - To Do List
 
 ### 주요기능 [확인](https://github.com/dongh9508/Project-ToDoList/tree/master/image/MainFunction)
 
-### project-day-1
+<details><summary>project-day-1 </summary>
+<p>
 
   * Spring-Boot-Web-TDL 프로젝트 생성.
 
@@ -40,8 +41,11 @@ Prjoect - To Do List
     * CreatedDate(생성 시간) -> LocalDateTime
 
     * CompletedDate(완료 시간) -> LocalDateTime
+</p>
+</details>
 
-### project-day-2
+<details><summary>project-day-2 </summary>
+<p>
 
   * 프로젝트 패키지 생성.
 
@@ -70,20 +74,29 @@ Prjoect - To Do List
     * 부트스트랩을 활용한 뷰 [확인](./image/2.png)
 
   * IntelliJ IDEA 와 MySQL [연동](./image/3.png)
+</p>
+</details>
 
-### project-day-3
+<details><summary>project-day-3 </summary>
+<p>
 
   * View 수정 및 [업데이트](./image/4.png)
+</p>
+</details>
 
-### project-day-4
+<details><summary>project-day-4 </summary>
+<p>
 
   * View 수정 및 업데이트
 
     * css 설정 값 추가 및 수정 
     
     * Header와 Footer 생성.
+</p>
+</details>
 
-### project-day-5
+<details><summary>project-day-5 </summary>
+<p>
 
   * to do list 목록의 CRUD를 위한 ToDoListRestController 클래스 생성.
 
@@ -92,9 +105,11 @@ Prjoect - To Do List
     * 받아온 Input값을 postToDoList 메소드를 통해서 및 PostMapping으로 url 매핑 처리후 ToDoListService에서 로직 처리.
 
     * ToDoListService에서 로직을 통해 DB에 값을 저장 한 뒤 View가 Redirect 된 후 저장된 목록 출력.
+</p>
+</details>
 
-
-### project-day-6
+<details><summary>project-day-6 </summary>
+<p>
 
   * to do list 목록의 삭제 기능과 상태와 내용 업데이트 기능 구현
 
@@ -103,9 +118,11 @@ Prjoect - To Do List
     * 상태와 내용 업데이트를 위해서  @PathVariable를 통해서 idx 값을 받아온 뒤 PutMapping으로 매핑시킨 뒤, putDescription, putStatus 메소드를 생성해서 로직 처리.
 
   * 기존의 View에서 [업데이트](./image/5.png)
+</p>
+</details>
 
-
-### project-day-7
+<details><summary>project-day-7 </summary>
+<p>
 
   * User 모델과 ToDoList 모델 1 : 1 관계 설정.
 
@@ -132,8 +149,11 @@ Prjoect - To Do List
   * User 객체를 이용하기 위해서 Controller, Repository, Service 클래스 생성.
 
   * ToDoListController 클래스와 ToDoListRestController의 수정을 통해서 User 객체 값 [저장](./image/6.png).
+</p>
+</details>
 
-### project-day-8
+<details><summary>project-day-8 </summary>
+<p>
 
   * 로그인 기능 구현
 
@@ -164,16 +184,22 @@ Prjoect - To Do List
       * Username이 존재할 경우, password가 일치 하지 않을시 로그인 실패.
 
       * Username이 존재할 경우, password가 일치하다면 로그인 성공.
+</p>
+</details>
 
-### project-day-9
+<details><summary>project-day-9 </summary>
+<p>
 
   * 로그인을 하지 않고 To Do List url로 이동할 경우, 로그인 화면으로 redirect 되도록 설정.
 
   * To Do List에 현재 로그인을 한 유저가 등록한 To Do 항목과 Complete 항목이 보이도록 설정.
 
   * To Do가 등록될 때, DB의 To Do List의 테이블에도 현재 로그인 한 유저의 Idx가 [저장](./image/tododb.png)됨.
+</p>
+</details>
 
-### project-day-10
+<details><summary>project-day-10 </summary>
+<p>
 
   * User 모델 객체와 ToDoList 모델 객체간 관계를 단방향 관계에서 양방향 관계로 재설정.
 
@@ -190,8 +216,12 @@ Prjoect - To Do List
   * ToDoList 모델에 `@ManyToOne` 어노테이션을 사용하고, User 모델에 `@OneToMany` 어노테이션을 사용해서 N : 1 양방향 관계로 설정.
 
   * 테이블 및 코드 [확인](https://github.com/dongh9508/Project-ToDoList/tree/master/image/RelationShip)
+  
+</p>
+</details>
 
-### project-day-11
+<details><summary>project-day-11 </summary>
+<p>
 
   * 현재 User가 자신이 등록한 ToDoList를 가지고 있어야 한다.
 
@@ -220,8 +250,11 @@ Prjoect - To Do List
       }
     }
     ```
+</p>
+</details>
 
-### prjoect-day-12
+<details><summary>project-day-12 </summary>
+<p>
 
   * /list url로 redirect 될 때마다 콘솔에 현재 User의 Idx와 User가 가지고 있는 ToDoList들의 객체들을 출력.
 
@@ -277,9 +310,13 @@ Prjoect - To Do List
 
           * PasswordEncoder 클래스를 이용해서 인코딩 에러가 일어나는 부분을 해결.
 
-### prjoect-day-13
+</p>
+</details>
 
-  * day-12에서 생성한 프로젝트에서 [Guide](https://spring.io/guides/gs/securing-web)를 통해 코드 실습 진행.
+<details><summary>project-day-13 </summary>
+<p>
+
+  * day-12에서 생성한 프로젝트에서 [GUIDE](https://spring.io/guides/gs/securing-web)를 통해 코드 실습 진행.
 
   * 템플릿에 `home.html` 과 `hello.html` 를 생성하고, MvcCofig 클래스를 생성.
 
@@ -352,13 +389,6 @@ Prjoect - To Do List
       * 즉, 스프링 시큐리티를 통해서 로그인을 성공시키면, 유저는 인증된 사용자가 되고, 인증된 사용자가 가질수 있는 권한을 가지게 된다.
 
       * 위 코드는 인증된 사용자에게 `/home` 으로 접근을 할 수 있게 하는 권한을 부여하였다.
+</p>
+</details>
 
-
-
-
-
-  
-
-  
-
-  
