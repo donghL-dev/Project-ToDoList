@@ -279,7 +279,7 @@ Prjoect - To Do List
 
 ### prjoect-day-13
 
-  * day-12에서 생성한 프로젝트에서 (Guide)[https://spring.io/guides/gs/securing-web]를 통해 코드 실습 진행.
+  * day-12에서 생성한 프로젝트에서 [Guide](https://spring.io/guides/gs/securing-web)를 통해 코드 실습 진행.
 
   * 템플릿에 `home.html` 과 `hello.html` 를 생성하고, MvcCofig 클래스를 생성.
 
