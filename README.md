@@ -416,3 +416,110 @@ Prjoect - To Do List
       * 위 코드는 인증된 사용자에게 `/home` 으로 접근을 할 수 있게 하는 권한을 부여하였다.
   </p>
   </details>
+
+### prjoect-day-14
+
+  <details><summary>CLICK</summary>
+  <p>
+
+  * [GUIDE](https://spring.io/guides/gs/securing-web)를 통해 진행했던 실습 코드를 수정 및 리팩토링.
+
+  * 지난 코드 내용 [리뷰](https://github.com/dongh9508/Project-ToDoList/tree/master/image/SECREVIEW)
+
+  * 이전에 진행했던 UserDetails 클래스를 통해서 인 메모리에 유저를 저장했던 방식은 테스트 코드에서 주로 쓰이는 방식.
+
+  * 현실적인 User를 생성하기 위해서 이전 코드에서 UserDetails 클래스 코드 부분 제거.
+
+  * AccountController, AccountService, AccountRepository 생성.
+
+  * AccountService 클래스에서 UserDetailsService 인터페이스를 상속받는다.
+
+    * `loadUserByUsername()` 메소드를 오버라이딩한다.
+
+      * `loadUserByUsername()` 메소드에서 파라미터로 받은 username으로 Account를 레포에서 찾아오고, 찾아온 Account를 UserDetalis 인터페이스로 변환한다.
+
+      * Account는 현재 프로젝트만의 도메인이므로, 스프링 시큐리티는 이 도메인을 알 수가 없기 때문에, 스프링 시큐리티가 알 수 있도록 UserDetalis 인터페이스로 변환한다.
+
+      * UserDetalis 객체가 생성된 코드.
+
+        ```java
+        UserDetails userDetails = new UserDetails() {
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return null;
+            }
+
+            @Override
+            public String getPassword() {
+                return null;
+            }
+
+            @Override
+            public String getUsername() {
+                return null;
+            }
+
+            @Override
+            public boolean isAccountNonExpired() {
+                return false;
+            }
+
+            @Override
+            public boolean isAccountNonLocked() {
+                return false;
+            }
+
+            @Override
+            public boolean isCredentialsNonExpired() {
+                return false;
+            }
+
+            @Override
+            public boolean isEnabled() {
+                return false;
+            }
+        }
+        ```
+      * ROLE에 관한것을 원래는 따로 만들어야 하나, 간단하게 UserDetails 안에 ROLE을 만들어서 처리함.
+
+      * User를 생성하기 위해서 WebSecurityConfig 클래스에서 `/careate` url도 인증없이 접속할 수 있도록 수정.
+
+      * 프로젝트 빌드 후, `/create` url로 이동하면, 생성된 계정을 [확인](./image/22.png)이 가능하다.
+
+        * 해당 url로 이동했을 때, 패스워드가 그대로 노출되기 때문에 문제가 됨. 이런식으로 해선 안됨.
+
+      * 확인된 계정으로 로그인을 하더라도, 콘솔 로그창에 에러가 출력되면서 로그인이 되지 않음.
+
+        * 에러를 확인해본 결과, password 인코딩 문제가 에러의 원인이 됨.
+
+        * 해결을 위해선 WebSecurityConfig 클래스에 PasswordEncoder 타입의 passwordEncoder() 메소드를 `@Bean`으로 등록.
+
+          ```java
+          @Bean
+          public PasswordEncoder passwordEncoder() {
+              return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+          }
+          ```
+        * AccountService 클래스에서 account의 패스워드를 불러와서 PasswordEncoder 클래스를 통해서 인코딩을 거친 후 저장.
+      
+      * 프로젝트 재빌드 후, `/create` url로 이동하면, 생성된 계정의 패스워드가 인코딩 된 것을 [확인](./image/23.png)할 수 있다.
+
+      * 인코딩을 거친 후에는 로그인 시에 콘솔에 나타났던 패스워드 인코딩 에러가 일어나지 않고 정상 로그인이 됨.   
+
+      * UserDetalis 객체를 쓸 경우, 코드가 길어지기 때문에, 가독성이 떨어진다. 
+      
+      * 스프링 시큐리티 자체에 내장되어 있는 User라는 객체가 UserDetalis를 상속받으므로 User 객체로 대체하면 장황한 코드를 줄일 수 있음.
+
+        * 첫번째 파라미터는 User ID, 두번째는 패스워드, 세번째는 해당 유저의 ROLE이 들어감.
+
+        ```java
+        return new User(account.getEmail(), account.getPassword(), authorities);
+        ```
+
+      * 생성된 ROLE에 의해서 WebSeucrityConfig 클래스에서 접근 권한에 대해 다르게 설정이 가능.
+
+        * `.antMatchers("/admin/**").hasRole("ADMIN")` 와 같이 설정한다면, `/admin` 으로 시작되는 모든 url은 ADMIN ROLE을 가진 유저만 접근이 가능하단 의미가 됨.
+  </p>
+  </details>
+
+  
