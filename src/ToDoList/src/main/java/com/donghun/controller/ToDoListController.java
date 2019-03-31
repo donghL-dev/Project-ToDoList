@@ -2,23 +2,25 @@ package com.donghun.controller;
 
 import com.donghun.domain.ToDoList;
 import com.donghun.domain.User;
-import com.donghun.repository.ToDoListRepository;
 import com.donghun.service.ToDoListService;
 import com.donghun.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 
-import java.util.List;
-
+/**
+ * @author dongh9508
+ * @since  2019-03-29
+ */
 @Controller
+@RequestMapping("/todolist")
 public class ToDoListController {
-
-    @Autowired
-    ToDoListRepository toDoListRepository;
 
     @Autowired
     UserService userService;
@@ -26,73 +28,40 @@ public class ToDoListController {
     @Autowired
     ToDoListService toDoListService;
 
-    private User user;
+    @GetMapping
+    public String list(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        User user = userService.findUserId(currentUser.getUsername());
+        model.addAttribute("todoList", toDoListService.findToDoList(user));
+        return "todolist/list";
+    }
 
-    @GetMapping("/list")
-    public String list(Model model) {
-        if(user == null) {
-            return "todolist/login";
+    @PostMapping
+    public ResponseEntity<?> postToDoList(@RequestBody @Valid ToDoList toDoList, BindingResult result,
+                                          @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+        if(result.hasErrors()) {
+           userService.validation(result);
         }
-        else {
-            model.addAttribute("todoList", toDoListService.findToDoList(user));
 
-            System.out.println("현재 로그인한 유저의 Idx : " + user.getIdx());
-
-            List<ToDoList> toDoLists = user.getToDoLists();
-            if(toDoLists == null)
-                System.out.println("현재 작성한 ToDo가 없습니다.");
-            else {
-                StringBuilder sb = new StringBuilder();
-                for(ToDoList toDo : toDoLists)
-                    sb.append(toDo.getIdx()).append(" ").append(toDo.getDescription()).append(" ").append(toDo.getStatus()).append(" ")
-                    .append(toDo.getCreatedDate()).append(" ").append(toDo.getCompletedDate()).append("\n");
-                System.out.println(sb.toString() + "--------------------------------------------");
-            }
-
-            return "todolist/list";
-        }
-    }
-
-    @GetMapping("/logout")
-    public String logout() {
-        user = null;
-        return "todolist/login";
-    }
-
-    @PostMapping("/todolist/idxrequest")
-    public ResponseEntity<?> postIdx(@RequestBody User user2) {
-        user = userService.findUserName(user2.getName());
-        return new ResponseEntity<>("{}", HttpStatus.OK);
-    }
-
-
-    @PostMapping("/todolist")
-    public ResponseEntity<?> postToDoList(@RequestBody ToDoList toDoList) {
-        toDoList.setCreatedDateNow();
-        user.add(toDoList);
-        toDoListRepository.save(toDoList);
+        User user = userService.findUserId(currentUser.getUsername());
+        toDoListService.PostToDoList(toDoList, user);
         return new ResponseEntity<>("{}", HttpStatus.CREATED);
     }
 
-    @PutMapping("/todolist/status/{idx}")
+    @PutMapping("/status/{idx}")
     public ResponseEntity<?> putStatus(@PathVariable("idx")Integer idx, @RequestBody ToDoList toDoList) {
-        ToDoList persistToDoList = toDoListRepository.getOne(idx);
-        persistToDoList.StatusUpdate(toDoList);
-        toDoListRepository.save(persistToDoList);
+        toDoListService.putStatusToDoList(idx, toDoList);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
-    @PutMapping("/todolist/{idx}")
+    @PutMapping("/{idx}")
     public ResponseEntity<?> putDescription(@PathVariable("idx")Integer idx, @RequestBody ToDoList toDoList) {
-        ToDoList persistToDoList = toDoListRepository.getOne(idx);
-        persistToDoList.update2(toDoList);
-        toDoListRepository.save(persistToDoList);
+        toDoListService.putToDoList(idx, toDoList);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
-    @DeleteMapping("/todolist/{idx}")
+    @DeleteMapping("/{idx}")
     public ResponseEntity<?> deleteToDoList(@PathVariable("idx")Integer idx) {
-        toDoListRepository.deleteById(idx);
+        toDoListService.deleteToDoList(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.donghun.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -7,18 +8,21 @@ import javax.persistence.Table;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Entity
-@Table
+/**
+ * @author dongh9508
+ * @since  2019-03-29
+ */
 @Getter
 @Setter
+@Entity
 @NoArgsConstructor
 @ToString
-public class User {
+@EqualsAndHashCode(of = "idx")
+public class User implements Serializable {
 
     @Id
     @Column
@@ -26,28 +30,33 @@ public class User {
     private Integer idx;
 
     @Column
-    private String name;
+    private String id;
 
     @Column
+    @JsonIgnore
     private String password;
 
     @Column
     private String email;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<ToDoList> toDoLists = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "idx")
+    private List<UserRole> roles;
+
     @Builder
-    public User(String name, String password, String email, List<ToDoList> toDoLists) {
-        this.name = name;
+    public User(String id, String password, String email, List<ToDoList> toDoLists, List<UserRole> roles) {
+        this.id = id;
         this.password = password;
         this.email = email;
         this.toDoLists = toDoLists;
+        this.roles = roles;
     }
 
     public void add(ToDoList toDoList) {
         toDoList.setUser(this);
         this.toDoLists.add(toDoList);
     }
-
 }

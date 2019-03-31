@@ -522,4 +522,126 @@ Prjoect - To Do List
   </p>
   </details>
 
+### prjoect-day-15
+
+  <details><summary>CLICK</summary>
+  <p>
+
+  * ToDoList 프로젝트에 Spring Security 적용.
+
+  * 기존의 build.gradle 에 Spring Security 을 위한 의존성 추가.
+
+    ```java
+    compile("org.springframework.boot:spring-boot-starter-security")
+    ```
   
+  * 프로젝트 하부에 config 패키지를 생성하고 스프링 시큐리티를 설정을 위한 SecurityConfig 클래스 생성.
+
+    * SecurityConfig 클래스에 `@EnableWebSecurity` 어노테이션을 사용하고, WebSecurityConfigurerAdapter 클래스를 상속받는다.
+
+    * 위와 같이 진행할 경우, 사이트 전체가 잠겨서 configure() 메소드를 오버라이딩 해서 페이지의 인증을 해제.
+
+    * 자원에 대한 접근 해제, 모든 경로에 대해 PermitAll.
+
+  * UserRole 도메인을 생성.
+
+    * User와 `@ManyToOne` 어노테이션을 사용해서 관게성을 가진다.
+
+    * User 클래스 쪽에서 UserRole과 `@OneToMany` 관계를 갖고, 엔티티들의 영속관계를 한번에 처리하기 위해, casccade 속성을 주고, UserRole과 User를 둘다 즉시 조회하기 위해서 fetchtype은 EAGER로 설정한다.
+
+    * 관계성을 매핑하고 난 이후, 'entityManagerFactory' 에러가 발생.
+
+      * 기존의 ToDoList와의 관계성 매핑으로 인해서, UserRole과의 관계와 충돌 발생. ToDoList의 FetchType을 Lazy로 주면서 해결.
+    
+    * 도메인 간의 관계성 설정을 마친후, 계정 생성 시도.
+
+      * Spring Security를 적용할 경우, 기존의 Ajax의 POST 호출 시 403 Forbidden 에러가 발생.
+
+      * 원인은 csrf 필터로 인해서, csrf 토큰 값이 누락되어서 발생하는 문제. 
+
+      * Ajax 요청 Header에 csrf token 정보를 포함해서 전송.
+
+  * UserDTO 도메인 생성.
+
+    * DTO : 각 계층간의 데이터 교환을 위해 사용되는 순수 객체, DTO는 각 계층간 데이터 전송을 위해 아무런 로직을 갖지 않고 오직 데이터를 담기 위해 사용되는 필드와 Getter/Setter 메서드만 가지는 객체이다.
+
+    * DTO를 사용하는 이유.
+
+      * 어떤 값을 요청할 때, 그 요청한 값을 DTO에 담지 않고 일일이 하나씩 응답해준다면, 네트워크에 엄청나게 많은 트래픽이 발생하기 떄문에 트래픽을 줄이기 위함.
+
+      * @Vaild 어노테이션과 BindingResult 클래스 그리고 DTO 클래스 내에 있는 @NotEmpty, @NotNull, @Email 어노테이션을 통해서 회원가입을 위한 데이터에 유효성 검증을 위해서도 사용하였다.
+
+  * 계정 생성 시에 DB를 조회해서 아이디와 이메일이 중복인지 아닌지 중복 검사 체크.
+
+    * 이상이 없다면, UserRepository에 저장.
+
+  * 계정 생성 성공.
+
+    * 비밀번호가 암호화되서 저장된것을 [확인](./image/24.png)
+
+  * 생성된 계정을 통해서 스프링 시큐리티가 적용된 로그인 로직 구성.
+
+    * 기존의 UserService 클래스에 UserDetailsService 클래스를 상속.
+
+      * loadUserByUsername(String username) 메소드를 오버라이딩.
+
+      * 로그인을 할 때 입력한 username 값을 통해서 DB에서 현재 유저를 찾아온 후, 유저 클래스 생성하여 매핑.
+
+      * 매핑된 유저에 ROLE 필드에 관한 값을 세팅 후, 스프링 시큐리티에서 제공하는 유저 객체에 파라미터로 유저의 아이디, 비밀번호, Roles의 리스트까지 넣고 리턴.
+
+    * SecurityConfig 클래스에서 configureGloba() 메소드에 패스워드 인코딩 처리를 해줌.
+
+    * SecurityConfig 클래스에서 configure() 메소드를 통해서 로그인의 성공 여부에 따른 URL 매핑을 통해 로그인 과정 마무리.
+
+    * 성공적인 로그인을 할 경우, `/list`로 이동되어서 ToDoList의 View를 띄어줌.
+
+    * ToDoList 쪽에 로그아웃 버튼 생성.
+
+      * 로그아웃 버튼을 통해서 로그인 화면으로 이동.
+
+    * 404 에러 페이지와 500 에러 페이지에 따른 뷰 이동.
+
+      * ErrorController 클래스 생성 후, 에러 예외 처리 후 에러 뷰 매핑.
+
+    * 스프링 시큐리티를 사용하여 로그인을 했을 때, 현재 사용자 정보를 세션에서 불러오기.
+
+      * 로그인이 성공 한 이후 ToDoList View가 화면 출력 될 떄와 현재 로그인한 유저로 글을 등록 할 때, 현재 유저 정보를 세션에서 가져와야 한다.
+
+      * ToDoListController 클래스에서 /todolist url을 GetMapping과 PostMapping을 해주는 코드에서 파라미터로 @AuthenticationPrincipal 어노테이션과 함께 스프링 시큐리티에서 제공하는 유저 객체를 가진다.
+
+      * 그리고 그 유저 객체의 `.getUsername()` 메소드를 통해서 현재 로그인한 유저의 정보를 세션에서 불러올 수 있다.
+
+        ```java
+        @Controller
+        @RequestMapping("/todolist")
+        public class ToDoListController {
+
+          ....
+          ....
+
+          @GetMapping
+          public String list(Model model, @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+              User user = userService.findUserId(currentUser.getUsername());
+              model.addAttribute("todoList", toDoListService.findToDoList(user));
+              return "todolist/list";
+          }
+
+          @PostMapping
+          public ResponseEntity<?> postToDoList(@RequestBody @Valid ToDoList toDoList, BindingResult result,
+                                          @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
+              if(result.hasErrors()) {
+                  userService.validation(result);
+              }
+
+              User user = userService.findUserId(currentUser.getUsername());
+              toDoListService.PostToDoList(toDoList, user);
+              return new ResponseEntity<>("{}", HttpStatus.CREATED);
+          }
+
+          ....
+          ....
+
+        }
+        ```
+  </p>
+  </details>  

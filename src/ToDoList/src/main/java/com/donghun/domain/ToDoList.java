@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.awt.print.Book;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
+/**
+ * @author dongh9508
+ * @since  2019-03-29
+ */
 @Entity
 @Table
 @Getter
@@ -26,6 +27,7 @@ public class ToDoList implements Serializable {
     private Integer idx;
 
     @Column
+    @NotEmpty(message = "내용을 입력하세요.")
     private String description;
 
     @Column
@@ -37,7 +39,7 @@ public class ToDoList implements Serializable {
     @Column
     private LocalDateTime completedDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @Builder

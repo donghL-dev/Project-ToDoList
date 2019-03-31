@@ -2,6 +2,8 @@
 var content;
 var days;
 var id;
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
 
 $('.edit').click(function () {
     var name = $('.edit').attr('name');
@@ -22,6 +24,7 @@ $('#insert').click(function () {
         description: $('#new-task').val(),
         status: false
     });
+    $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
     $.ajax({
         url: "/todolist",
         type: "POST",
@@ -29,20 +32,21 @@ $('#insert').click(function () {
         contentType: "application/json",
         dataType: "json",
         success: function () {
-            location.href = '/list';
+            location.href = "/todolist";
         },
-        error: function () {
-            alert('저장 실패!');
+        error: function (request) {
+            alert(request.responseText);
         }
     });
 });
 
 $('.delete').click(function () {
+    $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
     $.ajax({
         url: "/todolist/" + $(this).val(),
         type: "DELETE",
         success: function () {
-            location.href = '/list';
+            location.href = '/todolist';
         },
         error: function () {
             alert('삭제 실패!');
@@ -56,6 +60,7 @@ $('.checkbox1').change(function () {
         var jsonData = JSON.stringify({
             status: true
         });
+        $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
         $.ajax({
             url: "/todolist/status/" + $(this).val(),
             type: "PUT",
@@ -63,7 +68,7 @@ $('.checkbox1').change(function () {
             contentType: "application/json",
             dataType: "json",
             success: function () {
-                location.href = '/list';
+                location.href = '/todolist';
             },
             error: function () {
                 alert('완료 실패!');
@@ -76,6 +81,7 @@ $('.checkbox2').change(function () {
     var jsonData2 = JSON.stringify({
         status: false
     });
+    $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
     $.ajax({
         url: "/todolist/status/" + $(this).val(),
         type: "PUT",
@@ -83,10 +89,33 @@ $('.checkbox2').change(function () {
         contentType: "application/json",
         dataType: "json",
         success: function () {
-            location.href = '/list';
+            location.href = '/todolist';
         },
         error: function () {
             alert('완료 실패!');
+        }
+    });
+});
+
+$('#register').click(function () {
+    var jsonData = JSON.stringify({
+        id: $('#username').val(),
+        email: $('#email').val(),
+        password: $('#password').val()
+    });
+    $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
+    $.ajax({
+        url: "/register",
+        type: "POST",
+        data: jsonData,
+        contentType: "application/json",
+        dataType: "json",
+        success: function () {
+            alert('가입 성공');
+            location.href = '/login';
+        },
+        error: function (request) {
+            alert(request.responseText);
         }
     });
 });
@@ -96,6 +125,7 @@ function update() {
     var jsonData = JSON.stringify({
         description: $('#new-content').val()
     });
+    $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
     $.ajax({
         url: "/todolist/" + id,
         type: "PUT",
@@ -103,7 +133,7 @@ function update() {
         contentType: "application/json",
         dataType: "json",
         success: function () {
-            location.href = '/list';
+            location.href = '/todolist';
         },
         error: function () {
             alert('수정 실패!');
@@ -112,9 +142,8 @@ function update() {
 }
 
 function move() {
-    location.href = "/list";
+    location.href = "/todolist";
 }
-
 
 function resize(obj) {
     console.log("AAAAAA");
