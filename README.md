@@ -607,7 +607,7 @@ Prjoect - To Do List
 
       * 로그인이 성공 한 이후 ToDoList View가 화면 출력 될 떄와 현재 로그인한 유저로 글을 등록 할 때, 현재 유저 정보를 세션에서 가져와야 한다.
 
-      * ToDoListController 클래스에서 /todolist url을 GetMapping과 PostMapping을 해주는 코드에서 파라미터로 @AuthenticationPrincipal 어노테이션과 함께 스프링 시큐리티에서 제공하는 유저 객체를 가진다.
+      * ToDoListController 클래스에서 /todolist url을 GetMapping과 PostMapping을 해주는 메소드에서 파라미터로 @AuthenticationPrincipal 어노테이션과 함께 스프링 시큐리티에서 제공하는 유저 객체를 추가한다.
 
       * 그리고 그 유저 객체의 `.getUsername()` 메소드를 통해서 현재 로그인한 유저의 정보를 세션에서 불러올 수 있다.
 
