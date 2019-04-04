@@ -67,5 +67,4 @@ public class UserService implements UserDetailsService {
         user.getRoles().forEach(userRole -> authorities.add(new SimpleGrantedAuthority("ROLE_" + userRole.getRoleName())));
         return new org.springframework.security.core.userdetails.User(user.getId(), user.getPassword(), authorities);
     }
-
 }

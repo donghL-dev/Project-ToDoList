@@ -44,6 +44,4 @@ public class ToDoListService {
         toDoListRepository.deleteById(idx);
     }
 
-
-
 }

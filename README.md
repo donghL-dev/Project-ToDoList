@@ -644,4 +644,30 @@ Prjoect - To Do List
         }
         ```
   </p>
-  </details>  
+  </details>
+
+### prjoect-day-16
+
+  <details><summary>CLICK</summary>
+  <p>
+
+  * 유효성 검증을 위한 코드 일부 수정.
+
+    * UserDTO 클래스에서 컬럼들에 선언해줬던  `@NotEmpty` 어노테이션에서 `@NotBlank` 어노테이션으로 변경.
+
+      * `@NotEmpty` 어노테이션의 경우, null 값과 empty 값은 검증에서 허용하지 않지만, white space 값은 허용하기 떄문에, `@NotBlank` 어노테이션으로 변경.
+
+      ||`@NotNull`| `@NotEmpty` | `@NotBlank` |
+      |:---:|:---:|
+      | null | 허용하지 않음 | 허용하지 않음 | 허용하지 않음 |
+      | "" | 허용 | 허용하지 않음 | 허용하지 않음 | 허용하지 않음 |
+      | " "(space) | 허용 | 허용 | 허용하지 않음 |
+
+  * User 클래스 컬럼 일부 수정.
+
+    * 컬럼으로 들어가는 필드들에 적용되어있는 `@Column` 어노테이션의 속성값을 `@Column(nullable = false)` 으로 변경.
+
+    * User 도메인으로 인해 DB 테이블이 생성될 때, null 이 되어선 안되는 컬럼들에 대해서 Not Null 제약을 걸어주기 위해서 nullable 속성값을 `@Column` 어노테이션에 추가함. 
+
+  </p>
+  </details>    

@@ -29,14 +29,14 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idx;
 
-    @Column
+    @Column(nullable = false)
     private String id;
 
-    @Column
+    @Column(nullable = false)
     @JsonIgnore
     private String password;
 
-    @Column
+    @Column(nullable = false)
     private String email;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
