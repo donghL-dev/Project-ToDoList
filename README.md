@@ -655,8 +655,7 @@ Prjoect - To Do List
 
     * UserDTO 클래스에서 컬럼들에 선언해줬던  `@NotEmpty` 어노테이션에서 `@NotBlank` 어노테이션으로 변경.
 
-      * `@NotEmpty` 어노테이션의 경우, null 값과 empty 값은 검증에서 허용하지 않지만, white space 값은 허용하기 떄문에, `@NotBlank` 어노테이션으로 변경.
-    
+      * `@NotEmpty` 어노테이션의 경우, null 값과 empty 값은 검증에서 허용하지 않지만, white space 값은 허용하기 떄문에, `@NotBlank` 어노테이션으로 변경.<br><br>
     
       |     | `@NotNull` | `@NotEmpty` |`@NotBlank` |
       :------: | :------------: | :----------: | :-----: |
