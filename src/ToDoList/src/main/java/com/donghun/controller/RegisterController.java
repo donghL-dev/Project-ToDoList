@@ -7,13 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * @author dongh9508
@@ -31,13 +29,17 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody @Valid UserDTO userDTO, BindingResult bindingResult) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult) {
+
         if(bindingResult.hasErrors()) {
-            userService.validation(bindingResult);
+            StringBuilder msg = userService.validation(bindingResult);
+            return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
         }
 
         String inputId = userDTO.getId();
         String inputEmail = userDTO.getEmail();
+
+        System.out.println(inputId + " " + inputEmail);
 
         if(userService.findUserId(inputId) != null)
             return new ResponseEntity<>("이미 존재하는 아이디입니다.", HttpStatus.FORBIDDEN);
@@ -47,4 +49,22 @@ public class RegisterController {
         userService.DTOsave(userDTO);
         return new ResponseEntity<>("{}", HttpStatus.CREATED);
     }
+
+    @PostMapping("/register/idcheck")
+    public ResponseEntity<?> idCheck(@RequestBody String id) {
+        if(userService.findUserId(id) != null)
+            return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<>("{}", HttpStatus.OK);
+    }
+
+    @PostMapping("/register/emailcheck")
+    public ResponseEntity<?> emailCheck(@RequestBody String email) {
+        if(userService.findUserEmail(email) != null)
+            return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
+        else
+            return new ResponseEntity<>("{}", HttpStatus.OK);
+    }
+
+
 }

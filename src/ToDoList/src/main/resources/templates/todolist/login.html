@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/form.css}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <meta name="_csrf" th:content="${_csrf.token}">
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
           xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 </head>
@@ -22,13 +20,22 @@
             </div>
             <form th:action="@{/login}" method="POST">
                 <div class="container">
+                    <p th:if="${param.error}" style="color: red">
+                        아이디 또는 비밀번호를 확인하시길 바랍니다.
+                    </p>
+                    <p th:if="${param.logout}">
+                        <b>로그아웃 되었습니다.</b>
+                    </p>
                     <label for="uname"><b>Username</b></label>
                     <input id="username" type="text" placeholder="Enter Username" name="username" required>
+                    <p class="vaild_error" id="login_id" style="margin: 3px 0 10px 0"></p>
 
                     <label for="psw"><b>Password</b></label>
                     <input id="password" type="password" placeholder="Enter Password" name="password" required>
+                    <p class="vaild_error" id="login_pw" style="margin: 3px 0 10px 0"></p>
 
                     <button id="login" type="submit">Login</button>
+                    <p class="vaild_error" id="login_error" style="margin: 3px 0 10px 0"></p>
                 </div>
             </form>
             <div class="container" style="background-color:#f1f1f1">
@@ -39,7 +46,7 @@
 </div>
 
 <footer style="height: 6%">
-    <div class="footer_title" style="">
+    <div class="footer_title">
         <p> Copyright@2019 Donghun Lim, All Rights Reserved.</p>
     </div>
 </footer>
@@ -50,7 +57,29 @@
     }
 </script>
 <script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/js/list.js?ver=<%=System.currentTimeMillis()%>}"></script>
+<script th:src="@{/js/list.js?ver=5}"></script>
+<script>
+    $('#username').keyup(function () {
+        if($(this).val().length < 4) {
+            $("#login_id").text('아이디를 4자리 이상 입력하십시오.').css('color', 'red');
+            $('#login_id').show();
+        }
+        else {
+            $('#login_id').hide();
+        }
+    });
+
+    $('#password').keyup(function () {
+        if($(this).val().length < 5) {
+            $("#login_pw").text('비밀번호를 5자리 이상 입력하십시오.').css('color', 'red');
+            $('#login_pw').show();
+        }
+        else {
+            $('#login_pw').hide();
+        }
+    });
+
+</script>
 
 </body>
 </html>

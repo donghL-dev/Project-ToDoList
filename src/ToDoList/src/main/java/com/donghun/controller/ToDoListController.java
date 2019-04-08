@@ -39,7 +39,8 @@ public class ToDoListController {
     public ResponseEntity<?> postToDoList(@RequestBody @Valid ToDoList toDoList, BindingResult result,
                                           @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
         if(result.hasErrors()) {
-           userService.validation(result);
+           StringBuilder msg = userService.validation(result);
+           return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
         }
 
         User user = userService.findUserId(currentUser.getUsername());

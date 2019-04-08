@@ -4,9 +4,7 @@
      <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/base.css}" />
-    <link rel="stylesheet" th:href="@{/css/list.css?ver=<%=System.currentTimeMillis()%>}"/>
-    <meta name="_csrf" th:content="${_csrf.token}">
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <link rel="stylesheet" th:href="@{/css/list.css?ver=1}"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
@@ -63,7 +61,7 @@
 
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:src="@{/js/bootstrap.js}"></script>
-<script th:src="@{/js/list.js?ver=<%=System.currentTimeMillis()%>}"></script>
+<script th:src="@{/js/list.js?ver=1}"></script>
 
 </body>
 </html>

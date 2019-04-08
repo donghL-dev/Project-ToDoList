@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -27,7 +28,7 @@ public class ToDoList implements Serializable {
     private Integer idx;
 
     @Column
-    @NotEmpty(message = "내용을 입력하세요.")
+    @NotBlank(message = "내용을 입력하세요.")
     private String description;
 
     @Column

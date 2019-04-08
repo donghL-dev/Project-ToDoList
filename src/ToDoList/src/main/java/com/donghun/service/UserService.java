@@ -52,17 +52,19 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public ResponseEntity<?> validation(BindingResult bindingResult) {
+    public StringBuilder validation(BindingResult bindingResult) {
+
         List<ObjectError> list = bindingResult.getAllErrors();
         StringBuilder msg = new StringBuilder();
         for(ObjectError error : list)
             msg.append(error.getDefaultMessage()).append("\n");
-        return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
+        return msg;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findById(username);
+
         List<GrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(userRole -> authorities.add(new SimpleGrantedAuthority("ROLE_" + userRole.getRoleName())));
         return new org.springframework.security.core.userdetails.User(user.getId(), user.getPassword(), authorities);

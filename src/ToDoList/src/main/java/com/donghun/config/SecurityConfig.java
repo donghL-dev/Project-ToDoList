@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/login", "/error", "/register").permitAll()
+                .antMatchers("/login", "/error", "/register", "/register/idcheck", "/register/emailcheck").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -38,7 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login");
+                    .logoutSuccessUrl("/login")
+                .and()
+                    .csrf()
+                    .disable();
     }
 
     @Bean

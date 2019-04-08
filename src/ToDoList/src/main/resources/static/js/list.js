@@ -2,8 +2,6 @@
 var content;
 var days;
 var id;
-var token = $("meta[name='_csrf']").attr("content");
-var header = $("meta[name='_csrf_header']").attr("content");
 
 $('.edit').click(function () {
     var name = $('.edit').attr('name');
@@ -24,7 +22,6 @@ $('#insert').click(function () {
         description: $('#new-task').val(),
         status: false
     });
-    $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
     $.ajax({
         url: "/todolist",
         type: "POST",
@@ -41,7 +38,6 @@ $('#insert').click(function () {
 });
 
 $('.delete').click(function () {
-    $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
     $.ajax({
         url: "/todolist/" + $(this).val(),
         type: "DELETE",
@@ -60,7 +56,6 @@ $('.checkbox1').change(function () {
         var jsonData = JSON.stringify({
             status: true
         });
-        $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
         $.ajax({
             url: "/todolist/status/" + $(this).val(),
             type: "PUT",
@@ -81,7 +76,6 @@ $('.checkbox2').change(function () {
     var jsonData2 = JSON.stringify({
         status: false
     });
-    $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
     $.ajax({
         url: "/todolist/status/" + $(this).val(),
         type: "PUT",
@@ -97,35 +91,12 @@ $('.checkbox2').change(function () {
     });
 });
 
-$('#register').click(function () {
-    var jsonData = JSON.stringify({
-        id: $('#username').val(),
-        email: $('#email').val(),
-        password: $('#password').val()
-    });
-    $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
-    $.ajax({
-        url: "/register",
-        type: "POST",
-        data: jsonData,
-        contentType: "application/json",
-        dataType: "json",
-        success: function () {
-            alert('가입 성공');
-            location.href = '/login';
-        },
-        error: function (request) {
-            alert(request.responseText);
-        }
-    });
-});
 
 function update() {
     $('.edit').attr("name","edit");
     var jsonData = JSON.stringify({
         description: $('#new-content').val()
     });
-    $(document).ajaxSend(function(e, xhr, options) { xhr.setRequestHeader(header, token); });
     $.ajax({
         url: "/todolist/" + id,
         type: "PUT",

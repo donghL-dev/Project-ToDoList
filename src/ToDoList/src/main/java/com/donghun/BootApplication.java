@@ -27,17 +27,6 @@ public class BootApplication {
         SpringApplication.run(BootApplication.class, args);
     }
 
-    private PasswordEncoder passwordEncoder =  new BCryptPasswordEncoder();
-
-    @Bean
-    public CommandLineRunner runner(UserRepository userRepository, ToDoListRepository toDoListRepository) throws Exception {
-        return (args) -> {
-            User user = userRepository.save(User.builder().id("havi").password(passwordEncoder.encode("test")).email("havi@gmail.com").build());
-
-            IntStream.rangeClosed(1, 20).forEach(index -> toDoListRepository.save(ToDoList.builder().description("게시글" + index).status(false).createdDate(LocalDateTime.now()).user(user).build()));
-        };
-    };
-
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();

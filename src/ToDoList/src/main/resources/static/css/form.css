@@ -66,6 +66,12 @@ button {
     width: 100%;
 }
 
+.vaild_error {
+    text-align: left;
+    margin: 3px 0 10px 0;
+    font-size: 9px;
+}
+
 button:hover {
     opacity: 0.8;
 }

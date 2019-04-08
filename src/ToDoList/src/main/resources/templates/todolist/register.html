@@ -3,8 +3,6 @@
 <head>
     <title>Todo Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="_csrf" th:content="${_csrf.token}">
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
     <link rel="stylesheet" th:href="@{/css/form.css?ver=1}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -22,12 +20,15 @@
             <div class="container">
                 <label for="uname"><b>Username</b></label>
                 <input id="username" type="text" placeholder="Enter Username" name="uname" required>
+                <p class="vaild_error" id="user_id" style="margin: 3px 0 10px 0"></p>
 
                 <label for="uname"><b>Email</b></label>
                 <input id="email" type="email" placeholder="Enter Email" name="email" required>
+                <p class="vaild_error" id="user_email" style="margin: 3px 0 10px 0"></p>
 
                 <label for="psw"><b>Password</b></label>
                 <input id="password" type="password" placeholder="Enter Password" name="psw" required>
+                <p class="vaild_error" id="user_pw" style="margin: 3px 0 10px 0"></p>
 
                 <button id="register" type="button">Register</button>
             </div>
@@ -42,7 +43,7 @@
 </footer>
 
 <script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/js/list.js?ver=<%=System.currentTimeMillis()%>}"></script>
+<script th:src="@{/js/register.js?ver=5}"></script>
 
 </body>
 </html>
