@@ -691,5 +691,72 @@ Prjoect - To Do List
     * 회원가입시에 Register를 누르기 전에도, 아이디가 중복인지 이메일이 중복인지 뷰를 통해서 나타날 수 있도록 코드 수정.
 
   </p>
-  </details>    
-    
+  </details>
+
+### prjoect-day-18
+
+  <details><summary>CLICK</summary>
+  <p>
+
+  * 부분적 테스트 코드 작성 시작.
+
+    * LoginControllerTests 클래스 생성.
+
+      * Ajax 혹은 client의 Request를 테스트 하기 위해서 WebApplicationContext 클래스와 MockMvc 클래스를 사용.
+
+      * root url 접근시의 get 매핑 테스트 코드 작성.
+
+      * 로그인 페이지 접근시의 get 메핑 테스트 코드 작성.
+
+  * 이후에도 여러 테스트 코드를 추가적으로 작성해서 추가할 예정.
+
+  </p>
+  </details>     
+
+### prjoect-day-19
+
+  <details><summary>CLICK</summary>
+  <p>
+
+  * 소스코드 통합.
+
+  * 계층형 ToDoList 구현하기.
+
+    * 계층형 ToDoList를 위한 Coment 도메인 생성.
+
+      * `idx(키)` -> `Long`
+
+      * `content(내용)` -> `String`
+
+      * `createdDate(생성시간)` -> `LocalDateTime`
+
+      * `modifiedDate(수정시간)` -> `LocalDateTime`
+
+    * Comment 도메인을 생성함으로써 CommentRepository, CommentController, CommentService 클래스 생성.
+
+  * Comment 등록을 위한 View [생성](./image/25.png)
+
+  * View에서 데이터 값을 전송하기 위한, CommentDTO 클래스 생성.
+
+  * 댓글 등록 및 데이터 베이스 값 저장.
+
+    * Comment 도메인과 ToDoList 도메인의 관계성 매핑.
+
+      * Comment 도메인에서 `@ManyToOne` 관계 매핑.
+
+      * ToDoList 도메인에서 `@OneToMany` 관계 매핑.
+
+    * CommentController 클래스에서 댓글 등록을 위한 Post 요청 메소드 생성.
+
+      * Post 요청 메소드 내에서 등록을 위한 비지니스 로직을 처리하기 위해 서비스 호출.
+
+      * 댓글 등록할 때, 댓글의 데이터에 대한 유효성 검증을 위한, 서비스 호출. (`validation()`)
+
+      * 검증이 끝났다면, `@Builder` 어노테이이션을 이용한 빌더 패턴을 이용해서 Comment 객체 생성 후, ToDoList의 add 메소드 실행.
+
+      * 마지막으로 CommentRepository 에 필요한 로직을 처리한 Comment 객체 저장.
+
+      * 댓글 등록 View에서 AJAX 호출을 통해서 Post 메소드 호출을 한 뒤, DB에 Comment 값 [저장완료](./image/26.png)
+
+  </p>
+  </details>      
