@@ -759,4 +759,30 @@ Prjoect - To Do List
       * 댓글 등록 View에서 AJAX 호출을 통해서 Post 메소드 호출을 한 뒤, DB에 Comment 값 [저장완료](./image/26.png)
 
   </p>
+  </details>
+
+### prjoect-day-20
+
+  <details><summary>CLICK</summary>
+  <p>
+
+  * 사용하지 않은 css, js 파일 모두 삭제.
+
+  * 중복되는 코드 부분들은 하나로 통일.
+
+  * 깔끔한 뷰를 위해서 html 및 css 그리고 js 코드 부분 수정.
+
+  * 댓글을 입력하면 입력한 View가 DB 값에 저장 이후, To Do List에 출력되도록 설정.
+
+  * 댓글 수정 및 삭제 구현.
+
+    * 댓글 수정 및 삭제를 위한 비지니스 로직 추가 및 put 매핑과 delete 매핑 추가.
+
+    * 댓글 수정 및 삭제를 하기 위해 View에서 AJAX 호출을 통해서 Post 메소드 호출을 한 뒤, DB에 Comment 수정 또는 삭제 적용.
+
+  * 계층형 ToDo로 작성된 댓글에 대해서도 완료 여부에 대한 설정 가능.
+
+    * Comment 도메인에 Status 컬럼 추가 및 체크 박스 여부에 따라 Status 값이 False 또는 True로 변경.
+
+  </p>
   </details>      
