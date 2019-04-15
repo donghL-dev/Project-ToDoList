@@ -778,7 +778,7 @@ Prjoect - To Do List
 
     * 댓글 수정 및 삭제를 위한 비지니스 로직 추가 및 put 매핑과 delete 매핑 추가.
 
-    * 댓글 수정 및 삭제를 하기 위해 View에서 AJAX 호출을 통해서 Post 메소드 호출을 한 뒤, DB에 Comment 수정 또는 삭제 적용.
+    * 댓글 수정 및 삭제를 하기 위해 View에서 AJAX 호출을 통해서 put 또는 delete 메소드 호출을 한 뒤, DB에 Comment 수정 또는 삭제 적용.
 
   * 계층형 ToDo로 작성된 댓글에 대해서도 완료 여부에 대한 설정 가능.
 
