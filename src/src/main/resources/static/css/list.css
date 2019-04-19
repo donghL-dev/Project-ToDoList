@@ -18,6 +18,14 @@ html{
     height: 100%;
 }
 
+.layer {
+    display: none;
+    margin-top: 15px;
+    margin-left: 10%;
+    margin-right: 10%;
+
+}
+
 input[type=submit] {
     width: auto;
     padding: 10px 18px;
@@ -100,6 +108,16 @@ button:hover {
 /* Heading */
 h3,
 label[for='new-task'] {
+    color: #333;
+    font-weight: 700;
+    font-size: 15px;
+    border-bottom: 2px solid #333;
+    padding: 10px 0 10px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+label[for='new-comment'] {
     color: #333;
     font-weight: 700;
     font-size: 15px;

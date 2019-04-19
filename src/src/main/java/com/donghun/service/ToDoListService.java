@@ -1,11 +1,13 @@
 package com.donghun.service;
 
+import com.donghun.domain.Comment;
 import com.donghun.domain.ToDoList;
 import com.donghun.domain.User;
 import com.donghun.repository.ToDoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,7 +21,12 @@ public class ToDoListService {
     private ToDoListRepository toDoListRepository;
 
     public List<ToDoList> findToDoList(User user){
-        return toDoListRepository.findByUserOrderByIdx(user);
+        List<ToDoList> lists = toDoListRepository.findByUserOrderByIdx(user);
+        for(ToDoList list : lists) {
+            Collections.sort(list.getComments());
+            list.setComments(list.getComments());
+        }
+        return lists;
     }
 
     public void PostToDoList(ToDoList toDoList, User user) {

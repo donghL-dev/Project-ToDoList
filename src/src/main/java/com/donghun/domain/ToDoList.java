@@ -7,9 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author dongh9508
@@ -43,6 +44,9 @@ public class ToDoList implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    @OneToMany(mappedBy = "toDoList", fetch = FetchType.LAZY)
+    List<Comment> comments = new ArrayList<>();
+
     @Builder
     public ToDoList(String description, Boolean status, LocalDateTime createdDate, LocalDateTime completedDate, User user) {
         this.description = description;
@@ -50,6 +54,11 @@ public class ToDoList implements Serializable {
         this.createdDate = createdDate;
         this.completedDate = completedDate;
         this.user = user;
+    }
+
+    public void add(Comment comment) {
+        comment.setToDoList(this);
+        this.comments.add(comment);
     }
 
     public void setCreatedDateNow() {
