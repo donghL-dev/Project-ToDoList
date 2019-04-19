@@ -785,4 +785,20 @@ Prjoect - To Do List
     * Comment 도메인에 Status 컬럼 추가 및 체크 박스 여부에 따라 Status 값이 False 또는 True로 변경.
 
   </p>
+  </details>
+
+### prjoect-day-21
+
+  <details><summary>CLICK</summary>
+  <p>
+
+  * 계층형 ToDoList 완료 여부 설정 및 컬럼 추가.
+
+  * 계층형 ToDoList 삽입, 삭제, 수정, 완료시에 페이지가 Reload가 되어서 접히는 이슈 해결.
+
+    * 데이터를 CommentDTO 객체를 이용해서 서버에 보낸 뒤, 다시 CommentDTO를 반환받아서 그 객체를 토대로 자바스크립트 객체 생성.
+
+    * 자바스크립트로 생성한 Comment 객체를 이용해서 페이지를 리로드 하지 않고, 삽입, 수정, 삭제 한 로직에 따른, 뷰를 반영. 
+
+  </p>
   </details>      
