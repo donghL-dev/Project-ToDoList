@@ -45,25 +45,25 @@ To Do List 주요 기능들
 
   ![ToDoEdit3](../21.png)
 
-### 걔층형 To Do 뷰 슬라이드 버튼
+### 계층형 To Do 뷰 슬라이드 버튼
 
   ![ToDoEdit1](../37.png)
 
   ![ToDoEdit2](../38.png)
 
-### 걔층형 To Do 등록
+### 계층형 To Do 등록
 
   ![ToDoCreate1](../27.png)
 
   ![ToDoCreate2](../28.png)
 
-### 걔층형 To Do 완료
+### 계층형 To Do 완료
 
   ![ToDoCompledte1](../29.png)
 
   ![ToDoCompledte2](../30.png)
 
-### To Do 삭제
+### 계층형 To Do 삭제
 
   ![ToDoDelete1](../34.png)
 
@@ -72,7 +72,7 @@ To Do List 주요 기능들
   ![ToDoDelete3](../36.png)
 
 
-### To Do 수정
+### 계층형 To Do 수정
 
   ![ToDoEdit1](../31.png)
 
