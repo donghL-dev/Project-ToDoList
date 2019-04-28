@@ -12,7 +12,7 @@ Prjoect - To Do List
 
   * 인원 : [민경환](https://www.github.com/ber01), [박동현](https://www.github.com/pdh6547), [신무곤](https://www.github.com/mkshin96), [신재홍](https://www.github.com/woghd9072), [양기석](https://www.github.com/yks095), [엄태균](https://www.github.com/etg6550), [임동훈](https://www.github.com/dongh9508), [최광민](https://www.github.com/rhkd4560), [하상엽](https://www.github.com/hagome0)
 
-### 개발환경
+## 개발환경
 
 |도구|버전|
 |:---:|:---:|
@@ -23,7 +23,12 @@ Prjoect - To Do List
 |DataBase |MySQL 8.0.3|
 |Build Tool |Gradle 5.2.1|
 
-### 주요기능 [확인](https://github.com/dongh9508/Project-ToDoList/tree/master/image/MainFunction)
+## 주요기능 
+
+ * [확인](https://github.com/dongh9508/Project-ToDoList/tree/master/image/MainFunction)
+
+## 개발과정
+<details><summary>세부정보</summary>
 
 ### project-day-1 
 
@@ -801,4 +806,20 @@ Prjoect - To Do List
     * 자바스크립트로 생성한 Comment 객체를 이용해서 페이지를 리로드 하지 않고, 삽입, 수정, 삭제 한 로직에 따른, 뷰를 반영. 
 
   </p>
-  </details>      
+  </details>
+
+### prjoect-day-22
+
+  <details><summary>CLICK</summary>
+  <p>
+
+  * ToDoList 수정 진행시에, 수정 버튼 디자인 변경 및 다른 삭제, 코맨트, 체크박스 등의 버튼들을 비활성화 처리.
+
+  * 계층형 ToDoList 수정시에도, 수정 버튼 디자인 변경 및 다른 삭제 및 체크박스 버튼 들을 비활성화 처리.
+
+  * 일부 HTML의 CSS 속성 및 View 변경.
+
+  </p>
+  </details>
+      
+</details>
