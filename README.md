@@ -32,9 +32,6 @@ Prjoect - To Do List
 
 ### project-day-1 
 
-  <details><summary>CLICK</summary>
-  <p>
-
   * Spring-Boot-Web-TDL 프로젝트 생성.
 
   * ToDoList 클래스 설계 및 생성.
@@ -48,13 +45,9 @@ Prjoect - To Do List
     * CreatedDate(생성 시간) -> LocalDateTime
 
     * CompletedDate(완료 시간) -> LocalDateTime
-  </p>
-  </details>
+
 
 ### project-day-2
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * 프로젝트 패키지 생성.
 
@@ -83,35 +76,23 @@ Prjoect - To Do List
     * 부트스트랩을 활용한 뷰 [확인](./image/2.png)
 
   * IntelliJ IDEA 와 MySQL [연동](./image/3.png)
-  </p>
-  </details>
+
 
 ### project-day-3
 
-  <details><summary>CLICK</summary>
-  <p>
-
   * View 수정 및 [업데이트](./image/4.png)
-  </p>
-  </details>
+
 
 ### project-day-4
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * View 수정 및 업데이트
 
     * css 설정 값 추가 및 수정 
     
     * Header와 Footer 생성.
-  </p>
-  </details>
+
 
 ### project-day-5
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * to do list 목록의 CRUD를 위한 ToDoListRestController 클래스 생성.
 
@@ -120,13 +101,9 @@ Prjoect - To Do List
     * 받아온 Input값을 postToDoList 메소드를 통해서 및 PostMapping으로 url 매핑 처리후 ToDoListService에서 로직 처리.
 
     * ToDoListService에서 로직을 통해 DB에 값을 저장 한 뒤 View가 Redirect 된 후 저장된 목록 출력.
-  </p>
-  </details>
+
 
 ### project-day-6
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * to do list 목록의 삭제 기능과 상태와 내용 업데이트 기능 구현
 
@@ -135,13 +112,9 @@ Prjoect - To Do List
     * 상태와 내용 업데이트를 위해서  @PathVariable를 통해서 idx 값을 받아온 뒤 PutMapping으로 매핑시킨 뒤, putDescription, putStatus 메소드를 생성해서 로직 처리.
 
   * 기존의 View에서 [업데이트](./image/5.png)
-  </p>
-  </details>
+
 
 ### project-day-7
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * User 모델과 ToDoList 모델 1 : 1 관계 설정.
 
@@ -169,13 +142,9 @@ Prjoect - To Do List
   * User 객체를 이용하기 위해서 Controller, Repository, Service 클래스 생성.
 
   * ToDoListController 클래스와 ToDoListRestController의 수정을 통해서 User 객체 값 [저장](./image/6.png).
-  </p>
-  </details>
+
 
 ### project-day-8
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * 로그인 기능 구현
 
@@ -206,26 +175,18 @@ Prjoect - To Do List
       * Username이 존재할 경우, password가 일치 하지 않을시 로그인 실패.
 
       * Username이 존재할 경우, password가 일치하다면 로그인 성공.
-  </p>
-  </details>
+
 
 ### project-day-9
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * 로그인을 하지 않고 To Do List url로 이동할 경우, 로그인 화면으로 redirect 되도록 설정.
 
   * To Do List에 현재 로그인을 한 유저가 등록한 To Do 항목과 Complete 항목이 보이도록 설정.
 
   * To Do가 등록될 때, DB의 To Do List의 테이블에도 현재 로그인 한 유저의 Idx가 [저장](./image/tododb.png)됨.
-  </p>
-  </details>
+
 
 ### project-day-10
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * User 모델 객체와 ToDoList 모델 객체간 관계를 단방향 관계에서 양방향 관계로 재설정.
 
@@ -242,13 +203,9 @@ Prjoect - To Do List
   * ToDoList 모델에 `@ManyToOne` 어노테이션을 사용하고, User 모델에 `@OneToMany` 어노테이션을 사용해서 N : 1 양방향 관계로 설정.
 
   * 테이블 및 코드 [확인](https://github.com/dongh9508/Project-ToDoList/tree/master/image/RelationShip)
-  </p>
-  </details>
+
 
 ### project-day-11
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * 현재 User가 자신이 등록한 ToDoList를 가지고 있어야 한다.
 
@@ -277,13 +234,9 @@ Prjoect - To Do List
       }
     }
     ```
-  </p>
-  </details>
+
 
 ### prjoect-day-12
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * /list url로 redirect 될 때마다 콘솔에 현재 User의 Idx와 User가 가지고 있는 ToDoList들의 객체들을 출력.
 
@@ -338,13 +291,9 @@ Prjoect - To Do List
           * configureGlobal() 메소드의 인메모리 인증 코드 부분의 password 부분을 인코딩 해주지 않아서 에러가 일어남.
 
           * PasswordEncoder 클래스를 이용해서 인코딩 에러가 일어나는 부분을 해결.
-  </p>
-  </details>
+
 
 ### prjoect-day-13
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * day-12에서 생성한 프로젝트에서 [GUIDE](https://spring.io/guides/gs/securing-web)를 통해 코드 실습 진행.
 
@@ -419,13 +368,9 @@ Prjoect - To Do List
       * 즉, 스프링 시큐리티를 통해서 로그인을 성공시키면, 유저는 인증된 사용자가 되고, 인증된 사용자가 가질수 있는 권한을 가지게 된다.
 
       * 위 코드는 인증된 사용자에게 `/home` 으로 접근을 할 수 있게 하는 권한을 부여하였다.
-  </p>
-  </details>
+
 
 ### prjoect-day-14
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * [GUIDE](https://spring.io/guides/gs/securing-web)를 통해 진행했던 실습 코드를 수정 및 리팩토링.
 
@@ -524,13 +469,9 @@ Prjoect - To Do List
       * 생성된 ROLE에 의해서 WebSeucrityConfig 클래스에서 접근 권한에 대해 다르게 설정이 가능.
 
         * `.antMatchers("/admin/**").hasRole("ADMIN")` 와 같이 설정한다면, `/admin` 으로 시작되는 모든 url은 ADMIN ROLE을 가진 유저만 접근이 가능하단 의미가 됨.
-  </p>
-  </details>
+
 
 ### prjoect-day-15
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * ToDoList 프로젝트에 Spring Security 적용.
 
@@ -648,13 +589,9 @@ Prjoect - To Do List
 
         }
         ```
-  </p>
-  </details>
+  
 
 ### prjoect-day-16
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * 유효성 검증을 위한 코드 일부 수정.
 
@@ -675,13 +612,8 @@ Prjoect - To Do List
 
     * User 도메인으로 인해 DB 테이블이 생성될 때, null 이 되어선 안되는 컬럼들에 대해서 Not Null 제약을 걸어주기 위해서 nullable 속성값을 `@Column` 어노테이션에 추가함. 
 
-  </p>
-  </details>
 
 ### prjoect-day-17
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * 유효성 검증을 위한 코드 일부 추가 및 유효성 검증 부분 마무리.
 
@@ -695,13 +627,8 @@ Prjoect - To Do List
 
     * 회원가입시에 Register를 누르기 전에도, 아이디가 중복인지 이메일이 중복인지 뷰를 통해서 나타날 수 있도록 코드 수정.
 
-  </p>
-  </details>
 
 ### prjoect-day-18
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * 부분적 테스트 코드 작성 시작.
 
@@ -715,13 +642,8 @@ Prjoect - To Do List
 
   * 이후에도 여러 테스트 코드를 추가적으로 작성해서 추가할 예정.
 
-  </p>
-  </details>     
 
 ### prjoect-day-19
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * 소스코드 통합.
 
@@ -763,13 +685,8 @@ Prjoect - To Do List
 
       * 댓글 등록 View에서 AJAX 호출을 통해서 Post 메소드 호출을 한 뒤, DB에 Comment 값 [저장완료](./image/26.png)
 
-  </p>
-  </details>
 
 ### prjoect-day-20
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * 사용하지 않은 css, js 파일 모두 삭제.
 
@@ -789,13 +706,8 @@ Prjoect - To Do List
 
     * Comment 도메인에 Status 컬럼 추가 및 체크 박스 여부에 따라 Status 값이 False 또는 True로 변경.
 
-  </p>
-  </details>
 
 ### prjoect-day-21
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * 계층형 ToDoList 완료 여부 설정 및 컬럼 추가.
 
@@ -805,21 +717,14 @@ Prjoect - To Do List
 
     * 자바스크립트로 생성한 Comment 객체를 이용해서 페이지를 리로드 하지 않고, 삽입, 수정, 삭제 한 로직에 따른, 뷰를 반영. 
 
-  </p>
-  </details>
 
 ### prjoect-day-22
-
-  <details><summary>CLICK</summary>
-  <p>
 
   * ToDoList 수정 진행시에, 수정 버튼 디자인 변경 및 다른 삭제, 코맨트, 체크박스 등의 버튼들을 비활성화 처리.
 
   * 계층형 ToDoList 수정시에도, 수정 버튼 디자인 변경 및 다른 삭제 및 체크박스 버튼 들을 비활성화 처리.
 
   * 일부 HTML의 CSS 속성 및 View 변경.
-
-  </p>
-  </details>
       
+
 </details>
