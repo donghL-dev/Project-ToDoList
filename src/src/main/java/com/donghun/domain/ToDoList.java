@@ -28,7 +28,7 @@ public class ToDoList implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idx;
 
-    @Column
+    @Column(length = 455)
     @NotBlank(message = "내용을 입력하세요.")
     private String description;
 
@@ -44,7 +44,7 @@ public class ToDoList implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @OneToMany(mappedBy = "toDoList", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     List<Comment> comments = new ArrayList<>();
 
     @Builder

@@ -64,9 +64,6 @@ public class Comment implements Comparable<Comment> {
 
     @Override
     public int compareTo(Comment o) {
-        if(this.idx < o.idx)
-            return -1;
-        else
-            return 1;
+        return this.idx < o.idx ? -1 : 1;
     }
 }

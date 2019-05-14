@@ -1,6 +1,5 @@
 package com.donghun.service;
 
-import com.donghun.domain.Comment;
 import com.donghun.domain.ToDoList;
 import com.donghun.domain.User;
 import com.donghun.repository.ToDoListRepository;

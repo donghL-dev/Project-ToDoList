@@ -4,7 +4,7 @@
     <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/base.css}" />
-    <link rel="stylesheet" th:href="@{/css/list.css?ver=5}"/>
+    <link rel="stylesheet" th:href="@{/css/list.css?ver=12}"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
@@ -25,21 +25,21 @@
     <h3>To do</h3>
     <ul>
         <li th:each="todoList : ${todoList}" th:if="${todoList.status == false}">
-            <h4  th:id="todo_description+${todoList.idx}" contenteditable="false" th:value="${todoList.idx}" style="width: 550px; height: 7%; margin-right: 10px; padding: 10px 13px 10px" th:href="'/todolist?idx='+${todoList.idx}" th:text="${todoList.description}" ></h4>
+            <h4  th:id="todo_description+${todoList.idx}" contenteditable="false" th:value="${todoList.idx}" style="width: 600px; margin-right: 10px; padding: 10px 13px 10px; word-break: break-all" th:href="'/todolist?idx='+${todoList.idx}" th:text="${todoList.description}" ></h4>
             <span style="float: right"><h5 style="float: right" th:text="${todoList.createdDate} ? ${#temporals.format(todoList.createdDate,'yyyy-MM-dd')} : ${todoList.createdDate}" ></h5></span>
-            <div clss="todo_function" style="float: right; height: 1%">
-                <span><button class="checkbox1" th:value="${todoList.idx}" style="width: 35px; margin-bottom: 20px"><i class="material-icons" style="margin-bottom: 20px">check_box_outline_blank</i></button></span>
-                <span><button th:id="commentBtn+${todoList.idx}" class="todocoet" style="width: 35px"><i class="material-icons">comment</i></button></span>
-                <span><button class="delete" th:value="${todoList.idx}" style="width: 35px"><i class="material-icons">delete</i></button></span>
-                <span><button class="edit" name="edit" style="width: 35px" th:value="${todoList.idx}"><i class="material-icons">edit</i></button></span>
+            <div clss="todo_function" style="float: right; height: 1%; margin-bottom: 5%">
+                <button class="checkbox1" th:value="${todoList.idx}" style="width: 35px; margin-bottom: 20px"><i class="material-icons" style="margin-bottom: 20px">check_box_outline_blank</i></button></span>
+                <button th:id="commentBtn+${todoList.idx}" class="todocoet" style="width: 35px"><i class="material-icons">comment</i></button>
+                <button class="delete" th:value="${todoList.idx}" style="width: 35px"><i class="material-icons">delete</i></button>
+                <button class="edit" name="edit" style="width: 35px" th:value="${todoList.idx}"><i class="material-icons">edit</i></button>
             </div>
             <span th:id="todoComment" class="layer">
                 <ul th:id="comment_ul">
                     <li th:id="comment_li+${comment.idx}" th:each="comment : ${todoList.comments}" style="margin-bottom: 1%">
-                        <h4 th:id="comment_content" th:value="${comment.idx}" th:if="!${comment.status}" contenteditable="false" style="width: 500px; padding: 10px 13px 10px" th:href="'/comment?idx='+${comment.idx}" th:text="${comment.content}"></h4>
-                        <h4 th:id="comment_content" th:value="${comment.idx}" th:if="${comment.status}" style="width: 500px; padding: 10px 13px 10px; text-decoration: line-through" th:href="'/comment?idx='+${comment.idx}" th:text="${comment.content}"></h4>
+                        <h4 th:id="comment_content" th:value="${comment.idx}" th:if="!${comment.status}" contenteditable="false" style="width: 480px; padding: 10px 13px 10px; word-break: break-all" th:href="'/comment?idx='+${comment.idx}" th:text="${comment.content}"></h4>
+                        <h4 th:id="comment_content" th:value="${comment.idx}" th:if="${comment.status}" style="width: 450px; padding: 10px 13px 10px; text-decoration: line-through; word-break: break-all" th:href="'/comment?idx='+${comment.idx}" th:text="${comment.content}"></h4>
                         <h5 th:id="comment_days" style="float: right" th:text="${comment.modifiedDate} ? ${#temporals.format(comment.modifiedDate,'yyyy-MM-dd')} : ${#temporals.format(comment.createdDate,'yyyy-MM-dd')}"></h5>
-                        <div style="float: right; margin-bottom: 4px">
+                        <div style="float: right; margin-bottom: 4px; margin-left: 50px">
                             <button class="checkbox3" th:value="${comment.idx}" th:if="!${comment.status}" style="width: 35px"><i class="material-icons" style="margin-bottom: 20px">check_box_outline_blank</i></button>
                             <button class="checkbox4" th:value="${comment.idx}" th:if="${comment.status}" style="width: 35px"><i class="material-icons" style="margin-bottom: 20px">check_box</i></button>
                             <button th:class="comment_delete" th:value="${comment.idx}" style="width: 35px"><i class="material-icons">delete</i></button>
@@ -49,7 +49,7 @@
                     </li>
                 </ul>
 
-                <div style="margin-left: 9%; width: 470px">
+                <div style="margin-left: 9%; width: 470px; margin-bottom: 10px">
                     <label for="new-commnet">ADD Comment</label>
                     <br>
                     <textarea class="mdl-textfield__input" th:id="new-commnet+${todoList.idx}" onfocus="this.value=''" placeholder="comment..."
@@ -64,20 +64,20 @@
     <h3>Completed</h3>
     <ul>
         <li th:each="todoList : ${todoList}" id="completed-tasks" th:if="${todoList.status == true}">
-            <h4 th:value="${todoList.idx}" style="width: 550px; height: 7%; padding: 10px 13px 10px; text-decoration: line-through" th:href="'/todolist?idx='+${todoList.idx}" th:text="${todoList.description}"></h4>
-            <span style="float: right"><p th:text="${todoList.completedDate} ? ${#temporals.format(todoList.completedDate,'yyyy-MM-dd')} : ${todoList.completedDate}" ></p></span>
-            <span style="float: right; margin-bottom: 10px">
-                <span><button class="checkbox2" th:value="${todoList.idx}" style="width: 35px"><i class="material-icons" style="margin-bottom: 20px">check_box</i></button></span>
-                <span><button th:value="${todoList.status}" class="todocoet" style="width: 35px"><i class="material-icons">comment</i></button></span>
-                <span><button class="delete" th:value="${todoList.idx}" style="width: 35px"><i class="material-icons">delete</i></button></span>
+            <h4 th:value="${todoList.idx}" style="width: 630px; padding: 10px 13px 10px; text-decoration: line-through; word-break: break-all" th:href="'/todolist?idx='+${todoList.idx}" th:text="${todoList.description}"></h4>
+            <span style="float: right; margin-top: 10px; margin-right: 4px"><p th:text="${todoList.completedDate} ? ${#temporals.format(todoList.completedDate,'yyyy-MM-dd')} : ${todoList.completedDate}" ></p></span>
+            <span style="float: right; margin-bottom: 2px">
+                <button class="checkbox2" th:value="${todoList.idx}" style="width: 35px"><i class="material-icons" style="margin-bottom: 8px">check_box</i></button>
+                <button th:value="${todoList.status}" class="todocoet" style="width: 35px"><i class="material-icons">comment</i></button>
+                <button class="delete" th:value="${todoList.idx}" style="width: 35px"><i class="material-icons">delete</i></button>
             </span>
             <span id="completeComment" class="layer">
                 <ul>
                     <li th:id="comment_li+${comment.idx}" th:each="comment : ${todoList.comments}">
-                        <h4 th:value="${comment.idx}" style="width: 500px; text-decoration: line-through; padding: 10px 13px 10px" th:href="'/comment?idx='+${comment.idx}"
+                        <h4 th:value="${comment.idx}" style="width: 500px; text-decoration: line-through; padding: 10px 13px 10px; word-break: break-all" th:href="'/comment?idx='+${comment.idx}"
                         th:text="${comment.content}"></h4>
                         <span style="float: right"><h5 style="float: right" th:text="${comment.modifiedDate} ? ${#temporals.format(comment.modifiedDate,'yyyy-MM-dd')} : ${#temporals.format(comment.createdDate,'yyyy-MM-dd')}"></h5></span>
-                        <div style="float: right; margin-bottom: 4px">
+                        <div style="float: right; margin-bottom: 4px; margin-left: 50px">
                             <button style="width: 35px"><i class="material-icons" style="margin-bottom: 20px">check_box</i></button>
                             <button th:class="comment_delete" th:value="${comment.idx}" style="width: 35px"><i class="material-icons">delete</i></button>
                         </div>
@@ -90,8 +90,8 @@
     <div th:replace="layout/footer::footer"></div>
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
-    <script th:src="@{/js/list.js?ver=1221}"></script>
-    <script th:src="@{/js/comment.js?ver=23}" th:inline="javascript"></script>
+    <script th:src="@{/js/list.js?ver=21}"></script>
+    <script th:src="@{/js/comment.js?ver=24}"></script>
 
 </body>
 </html>

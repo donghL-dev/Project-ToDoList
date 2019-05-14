@@ -12,12 +12,12 @@ $('#username').blur(function () {
             data: $('#username').val(),
             contentType: "application/json",
             dataType: "text",
-            success: function () {
-                $('#user_id').text('사용가능한 아이디 입니다.').css('color', 'green');
+            success: function (parm) {
+                $('#user_id').text(parm).css('color', 'green');
                 id_check = true;
             },
-            error: function () {
-                $('#user_id').text('이미 사용중인 아이디 입니다.').css('color', 'red');
+            error: function (parm) {
+                $('#user_id').text(parm.responseText).css('color', 'red');
                 id_check  = false;
             }
         });
@@ -48,12 +48,12 @@ $('#email').keyup(function () {
             data: $('#email').val(),
             contentType: "application/json",
             dataType: "text",
-            success: function () {
-                $('#user_email').text('멋진 이메일입니다.').css('color', 'green');
+            success: function (parm) {
+                $('#user_email').text(parm).css('color', 'green');
                 email_check = true;
             },
-            error: function () {
-                $('#user_email').text('이미 사용중인 이메일입니다.').css('color', 'red');
+            error: function (parm) {
+                $('#user_email').text(parm.responseText).css('color', 'red');
                 email_check = false;
             }
         });

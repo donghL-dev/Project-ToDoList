@@ -105,12 +105,16 @@ $('.comment_insert').click(function () {
 $(document).on("click",".comment_edit",function() {
     var comment_content = $(this).parent().parent().find('#comment_content');
     var comment_days = $(this).parent().parent().find('#comment_days');
+    var comment_delete_btn = $(this).parent().find('.comment_delete');
+    var comment_checkbox_btn = $(this).parent().find('.checkbox3');
     var date = new Date();
 
     comment_days.text(date.getFullYear() + "-" + ( date.getMonth() + 1 > 9 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1)  ) + "-" + date.getDate());
 
     comment_content.attr('contenteditable', true);
     comment_content.trigger('focus');
+    comment_delete_btn.css('visibility', 'hidden');
+    comment_checkbox_btn.css('visibility', 'hidden');
 
     var editBtn = $(this);
 
@@ -122,7 +126,7 @@ $(document).on("click",".comment_edit",function() {
     var i = document.createElement('i');
     i.style.marginBottom = "20px";
     i.className = "material-icons";
-    i.appendChild(document.createTextNode("edit"));
+    i.appendChild(document.createTextNode('done'));
 
     button.appendChild(i);
 
@@ -160,6 +164,8 @@ $(document).on("click",".comment_edit",function() {
                 alert('수정 실패!');
             }
         });
+        comment_delete_btn.css('visibility', 'visible');
+        comment_checkbox_btn.css('visibility', 'visible');
         comment_content.attr('contenteditable', false);
     });
 });

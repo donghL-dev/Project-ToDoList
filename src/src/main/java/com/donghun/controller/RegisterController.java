@@ -39,8 +39,6 @@ public class RegisterController {
         String inputId = userDTO.getId();
         String inputEmail = userDTO.getEmail();
 
-        System.out.println(inputId + " " + inputEmail);
-
         if(userService.findUserId(inputId) != null)
             return new ResponseEntity<>("이미 존재하는 아이디입니다.", HttpStatus.FORBIDDEN);
         else if(userService.findUserEmail(inputEmail) != null)
@@ -52,18 +50,14 @@ public class RegisterController {
 
     @PostMapping("/register/idcheck")
     public ResponseEntity<?> idCheck(@RequestBody String id) {
-        if(userService.findUserId(id) != null)
-            return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
-        else
-            return new ResponseEntity<>("{}", HttpStatus.OK);
+        return userService.findUserId(id) != null ? new ResponseEntity<>("이미 사용중인 아이디입니다.", HttpStatus.BAD_REQUEST)
+                : new ResponseEntity<>("사용가능한 멋진 아이디입니다.", HttpStatus.OK);
     }
 
     @PostMapping("/register/emailcheck")
     public ResponseEntity<?> emailCheck(@RequestBody String email) {
-        if(userService.findUserEmail(email) != null)
-            return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
-        else
-            return new ResponseEntity<>("{}", HttpStatus.OK);
+        return userService.findUserEmail(email) != null ? new ResponseEntity<>("이미 사용중인 이메일입니다.", HttpStatus.BAD_REQUEST)
+                : new ResponseEntity<>("사용가능한 멋진 이메일입니다.", HttpStatus.OK);
     }
 
 

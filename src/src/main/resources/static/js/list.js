@@ -2,11 +2,11 @@
 $('.todocoet').click(function () {
     var status = $(this).val();
     if(status) {
-        var completeComment = $(this).parent().parent().parent().find('#completeComment');
+        var completeComment = $(this).parent().parent().find('#completeComment');
         completeComment.slideToggle('slow');
     }
     else {
-        var todocomment = $(this).parent().parent().parent().find('#todoComment');
+        var todocomment = $(this).parent().parent().find('#todoComment');
         todocomment.slideToggle('slow');
     }
 
@@ -16,6 +16,16 @@ $('.edit').click(function () {
 
     $('#todo_description' + $(this).val()).attr('contenteditable', true);
     $('#todo_description' + $(this).val()).trigger('focus');
+
+    var delete_button = $(this).parent().find('.delete');
+    var checkbox_btn = $(this).parent().find('.checkbox1');
+    var comment_btn = $(this).parent().find('.todocoet');
+    var edit_btn_icon = $(this).children('.material-icons');
+
+    delete_button.css('visibility', 'hidden');
+    checkbox_btn.css('visibility', 'hidden');
+    comment_btn.css('visibility', 'hidden');
+    edit_btn_icon.text('done');
 
     $('.edit').click(function () {
         var jsonData = JSON.stringify({
