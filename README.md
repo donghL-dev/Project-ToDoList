@@ -726,13 +726,4 @@ Prjoect - To Do List
 
   * 일부 HTML의 CSS 속성 및 View 변경.
 
-
-### prjoect-day-23
-
-  * LoginControllerTests 클래스 생성 및 테스트 코드 수정 및 추가
-
-    * 로그인, 회원가입 페이지 get, post 테스트 코드 작성.
-
-    * 회원 가입 시의 유효성 검증을 위한 테스트 코드 작성.
-
 </details>
