@@ -726,4 +726,19 @@ Prjoect - To Do List
 
   * 일부 HTML의 CSS 속성 및 View 변경.
 
+
+### prjoect-day-23
+
+  * 개선사항 및 모든 문제들은 [issue](https://github.com/dongh9508/Project-ToDoList/issues)로 등록해서 관리.
+
+  * 등록된 이슈들을 토대로 이슈들을 처리하기 위한 Branch 생성 후, 문제가 없을 경우, Master Branch로 Merge 하는 방식으로 프로젝트를 진행할 예정임.
+
+  * UserDTO 클래스의 유효성 검증 어노테이션인 `@Pattern` 어노테이션 추가.
+
+    * 테스트 코드를 원할하게 동작하기 위해서, 기존의 js가 처리해주던 프론트에서의 검증 뿐만 아니라, 백앤드에서도 아이디 및 비밀번호를 검증해주기 위해 추가. 
+
+  * [#1](https://github.com/dongh9508/Project-ToDoList/issues/1) 이슈 처리 및 개선사항 Master Branch로 합병.
+
+    *  [#1](https://github.com/dongh9508/Project-ToDoList/issues/1) 이슈인 회원가입 테스트 코드 작성 완료.
+
 </details>
