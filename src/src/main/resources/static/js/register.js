@@ -3,9 +3,15 @@ var id_check = false;
 
 $('#username').blur(function () {
     var username = $('#username').val();
-    if (username.length < 4){
-        $('#user_id').text('아이디는 4자리 이상 기입헤야 합니다.').css('color', 'red');
-    } else{
+    var regExp = /^[a-z0-9]{4,12}$/g;
+
+    if (username.length === 0){
+        $('#user_id').text('아이디를 반드시 입력해야 합니다.').css('color', 'red');
+    }
+    else if(!regExp.test(username) || username.length < 4 || username.length > 12) {
+        $('#user_id').text('4~12의 영문 소문자, 숫자로 사용 해야합니다.').css('color', 'red');
+    }
+    else{
         $.ajax({
             url: "/register/idcheck",
             type: "POST",
@@ -25,8 +31,16 @@ $('#username').blur(function () {
 });
 
 $('#password').blur(function () {
-    if($(this).val().length < 5) {
-        $("#user_pw").text('비밀번호를 5자리 이상 입력하십시오.').css('color', 'red');
+
+    var regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{5,22}$/;
+    var password = $('#password').val();
+
+    if($(this).val().length === 0) {
+        $("#user_pw").text('비밀번호를 반드시 입력해야 합니다.').css('color', 'red');
+        $('#user_pw').show();
+    }
+    else if(!regExp.test(password) || password.length > 22 || password.length < 5) {
+        $('#user_pw').text('5~22의 영문 대소문자, 숫자, 특수문자로 사용해야합니다.').css('color', 'red');
         $('#user_pw').show();
     }
     else {
@@ -39,6 +53,10 @@ $('#email').keyup(function () {
     var re = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
     if(re.test(input_email) == false) {
         $("#user_email").text('이메일 형식에 맞게 입력하십시오.').css('color', 'red');
+        $('#user_email').show();
+    }
+    else if(input_email.length === 0) {
+        $("#user_email").text('이메일을 반드시 입력해야 합니다.').css('color', 'red');
         $('#user_email').show();
     }
     else {
