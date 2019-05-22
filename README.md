@@ -741,4 +741,12 @@ Prjoect - To Do List
 
     *  [#1](https://github.com/dongh9508/Project-ToDoList/issues/1) 이슈인 회원가입 테스트 코드 작성 완료.
 
+### prjoect-day-24
+
+  * [#3](https://github.com/dongh9508/Project-ToDoList/issues/3) 이슈 처리 및 개선사항 Master Branch로 합병.
+
+    * [#3](https://github.com/dongh9508/Project-ToDoList/issues/3) 이슈인 로그인 테스트 코드 작성 완료.
+
+    * 로그인 테스트 코드 작성 중에 MockMvc를 이용한 쿠키 상태 값을 불러오는 것이 안되어서 쿠키 값 갱신 테스트는 완료하지 못하였음.
+
 </details>
