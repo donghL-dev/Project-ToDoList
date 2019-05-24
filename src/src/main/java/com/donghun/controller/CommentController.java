@@ -42,13 +42,13 @@ public class CommentController {
     }
 
     @PutMapping("/status/{idx}")
-    public ResponseEntity<?> putStatus(@PathVariable("idx")Long idx, @RequestBody Comment comment) {
-        commentService.putStatusComment(idx, comment);
+    public ResponseEntity<?> putStatus(@PathVariable("idx")Long idx) {
+        commentService.putStatusComment(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
     @PutMapping("/{idx}")
-    public ResponseEntity<?> putContent(@PathVariable("idx")Long idx, @RequestBody Comment comment) {
+    public ResponseEntity<?> putContent(@PathVariable("idx")Long idx, @RequestBody String comment) {
         commentService.putComment(idx, comment);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }

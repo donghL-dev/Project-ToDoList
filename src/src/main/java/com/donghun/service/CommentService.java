@@ -42,15 +42,15 @@ public class CommentService {
         return commentDTO;
     }
 
-    public void putComment(Long idx, Comment comment) {
+    public void putComment(Long idx, String comment) {
         Comment persistComment = commentRepository.getOne(idx);
         persistComment.update2(comment);
         commentRepository.save(persistComment);
     }
 
-    public void putStatusComment(Long idx, Comment comment) {
+    public void putStatusComment(Long idx) {
         Comment persistComment = commentRepository.getOne(idx);
-        persistComment.StatusUpdate(comment);
+        persistComment.StatusUpdate(persistComment.getStatus());
         commentRepository.save(persistComment);
     }
 

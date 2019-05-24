@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -28,7 +29,8 @@ public class ToDoList implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idx;
 
-    @Column(length = 455)
+    @Column
+    @Length(max = 255, min = 1, message = "ToDo는 1~255 내에서 등록해야 합니다.")
     @NotBlank(message = "내용을 입력하세요.")
     private String description;
 
@@ -65,12 +67,12 @@ public class ToDoList implements Serializable {
         this.createdDate = LocalDateTime.now();
     }
 
-    public void StatusUpdate(ToDoList toDoList) {
-        this.status = toDoList.getStatus();
+    public void StatusUpdate(boolean bls) {
+        this.status = !bls;
         this.completedDate = this.status ? LocalDateTime.now() : null;
     }
 
-    public void update2(ToDoList toDoList) {
-        this.description = toDoList.getDescription();
+    public void update2(String description) {
+        this.description = description;
     }
 }

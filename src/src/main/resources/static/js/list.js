@@ -28,15 +28,12 @@ $('.edit').click(function () {
     edit_btn_icon.text('done');
 
     $('.edit').click(function () {
-        var jsonData = JSON.stringify({
-            description: $('#todo_description' + $(this).val()).text()
-        });
         $.ajax({
             url: "/todolist/" + $(this).val(),
             type: "PUT",
-            data: jsonData,
+            data: $('#todo_description' + $(this).val()).text(),
             contentType: "application/json",
-            dataType: "json",
+            dataType: "text",
             success: function () {
                 location.reload();
             },
@@ -83,15 +80,10 @@ $('.delete').click(function () {
 });
 
 $('.checkbox1').click(function () {
-    var jsonData = JSON.stringify({
-            status: true
-    });
     $.ajax({
         url: "/todolist/status/" + $(this).val(),
         type: "PUT",
-        data: jsonData,
         contentType: "application/json",
-        dataType: "json",
         success: function () {
             location.reload();
         },
@@ -102,15 +94,10 @@ $('.checkbox1').click(function () {
 });
 
 $('.checkbox2').click(function () {
-    var jsonData2 = JSON.stringify({
-        status: false
-    });
     $.ajax({
         url: "/todolist/status/" + $(this).val(),
         type: "PUT",
-        data: jsonData2,
         contentType: "application/json",
-        dataType: "json",
         success: function () {
             location.reload();
         },

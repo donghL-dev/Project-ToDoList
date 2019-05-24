@@ -52,13 +52,13 @@ public class Comment implements Comparable<Comment> {
     }
 
 
-    public void StatusUpdate(Comment comment) {
-        this.status = comment.getStatus();
+    public void StatusUpdate(boolean bls) {
+        this.status = !bls;
         this.completedDate = this.status ? LocalDateTime.now() : null;
     }
 
-    public void update2(Comment comment) {
-        this.content = comment.getContent();
+    public void update2(String comment) {
+        this.content = comment;
         this.modifiedDate = LocalDateTime.now();
     }
 

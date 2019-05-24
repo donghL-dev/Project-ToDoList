@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * @author dongh9508
@@ -49,14 +50,14 @@ public class ToDoListController {
     }
 
     @PutMapping("/status/{idx}")
-    public ResponseEntity<?> putStatus(@PathVariable("idx")Integer idx, @RequestBody ToDoList toDoList) {
-        toDoListService.putStatusToDoList(idx, toDoList);
+    public ResponseEntity<?> putStatus(@PathVariable("idx")Integer idx) {
+        toDoListService.putStatusToDoList(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
     @PutMapping("/{idx}")
-    public ResponseEntity<?> putDescription(@PathVariable("idx")Integer idx, @RequestBody ToDoList toDoList) {
-        toDoListService.putToDoList(idx, toDoList);
+    public ResponseEntity<?> putDescription(@PathVariable("idx")Integer idx, @RequestBody String description) {
+        toDoListService.putToDoList(idx, description);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
