@@ -4,6 +4,8 @@ Prjoect - To Do List
 
 * 이 저장소는 To Do List 프로젝트를 진행하면서 소스코드를 관리하고 버전관리를 위한 저장소입니다.
 
+* 프로젝트 배포 URL : http://dongh9508.iptime.org:8081
+
 * 목적 및 인원
   
   * Spring Boot & JPA 학습 및 Web Application(To Do List) 개발.
@@ -748,5 +750,69 @@ Prjoect - To Do List
     * [#3](https://github.com/dongh9508/Project-ToDoList/issues/3) 이슈인 로그인 테스트 코드 작성 완료.
 
     * 로그인 테스트 코드 작성 중에 MockMvc를 이용한 쿠키 상태 값을 불러오는 것이 안되어서 쿠키 값 갱신 테스트는 완료하지 못하였음.
+
+### prjoect-day-25
+
+  * [#5](https://github.com/dongh9508/Project-ToDoList/issues/5) 이슈 처리 및 개선사항 Master Branch로 합병.
+
+    * [#5](https://github.com/dongh9508/Project-ToDoList/issues/5) 이슈인 ToDoList 테스트 코드 작성 완료.
+
+      * ToDoList Get 요청
+
+        * `/`, `/todolist` 요청.
+
+      * ToDo 등록
+
+        * ToDo 문자열 길이 0
+
+          * ToDo의 최소 길이 미달로 등록 실패.
+
+        * ToDo 문자열 길이 256
+
+          * ToDO의 최대 길이 초과로 등록 실패.
+
+        * ToDo 문자열 길이 1 ~ 255 
+
+          * ToDo의 유효한 문자열 길이 범위이므로 등록 성공.
+
+        * 정상 등록된 ToDoList 객체 비교.
+
+          * 등록된 ToDoList, ToDoList.CreatedDate - `NotNull`
+
+          * ToDoList.CompletedDate - `Null`
+
+          * 현재 로그인한 User.Idx와 ToDoList를 등록한 User의 Idx 일치.
+
+      * ToDo 완료.
+
+        * ToDo 생성.
+
+          * 생성 직후, ToDo의 Status는 `false`, ToDo의 CompletedDate도 `Null`
+
+        * 생성된 ToDo 완료 처리, `put("/todolist/status/{idx}")` 요청.
+
+          * ToDo의 Status는 `true`, ToDo의 CompletedDate는 `LocalDateTime.now()`
+
+      * ToDo 삭제.
+
+        * ToDo 생성.
+
+          * 생성된 ToDo 객체는 `NotNull`
+
+        * ToDo 삭제 요청, `delete("/todolist/{idx}")` 요청.
+
+          * ToDo 삭제 확인(`Null`)
+
+      * ToDo 수정
+
+        * ToDo 생성
+
+          * ToDo 등록 내용 확인.
+
+        * ToDo 수정 요청, `put("/todolist/{idx}")` 요청.
+
+          * 변경된 description 저장.
+
+          * DB에서 변경된 description 확인. 
 
 </details>

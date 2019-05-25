@@ -21,14 +21,4 @@ public class LoginController {
         return "todolist/login";
     }
 
-    @PostMapping("/sucesslogin")
-    public String todolist() {
-        return "redirect:/todolist";
-    }
-
-    @PostMapping("/faillogin")
-    public String loginpage() {
-        return "redirect:/login";
-    }
-
 }

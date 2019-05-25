@@ -57,7 +57,6 @@ public class LoginControllerTest {
     @Autowired
     private UserService userService;
 
-    private User user;
 
     @Before
     public void registerUser() throws Exception {
@@ -132,18 +131,21 @@ public class LoginControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(authenticated())
-                .andExpect(view().name("todolist/list"));
+                .andExpect(view().name("todolist/list"))
+                .andExpect(model().attributeExists("todoList"));
 
         mockMvc.perform(get("/todolist").with(user("user1234").password("12345@A")))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(authenticated())
+                .andExpect(model().attributeExists("todoList"))
                 .andExpect(view().name("todolist/list"));
 
         mockMvc.perform(get("/todolist").with(user("user1234").password("12345@A").roles("USER")))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(authenticated())
+                .andExpect(model().attributeExists("todoList"))
                 .andExpect(view().name("todolist/list"));
     }
 
@@ -167,6 +169,7 @@ public class LoginControllerTest {
                 .andDo(print())
                 .andExpect(authenticated())
                 .andExpect(status().isOk())
+                .andExpect(model().attributeExists("todoList"))
                 .andExpect(view().name("todolist/list"));
     }
 
@@ -209,11 +212,11 @@ public class LoginControllerTest {
 
         // 올바르게 로그인 했을 경우, 로그인한 유저에 대한 세션을 얻을 수 있다.
         HttpSession httpSession = mockMvc.perform(formLogin().user("user1234").password("12345@A"))
-                                         .andDo(print())
-                                         .andExpect(authenticated())
-                                         .andReturn()
-                                         .getRequest()
-                                         .getSession(false);
+                .andDo(print())
+                .andExpect(authenticated())
+                .andReturn()
+                .getRequest()
+                .getSession(false);
 
         // 올바르게 로그인 한 유저의 세션을 통해서 todolist에 접근할 수 있다.
         mockMvc.perform(get("/todolist").session((MockHttpSession) httpSession))
@@ -223,11 +226,11 @@ public class LoginControllerTest {
 
         // 존재하지 않는 유저의 경우, 올바른 세션을 얻을 수 없다.
         httpSession = mockMvc.perform(formLogin().user("user1234555").password("asdasd123134"))
-                             .andDo(print())
-                             .andExpect(unauthenticated())
-                             .andReturn()
-                             .getRequest()
-                             .getSession(false);
+                .andDo(print())
+                .andExpect(unauthenticated())
+                .andReturn()
+                .getRequest()
+                .getSession(false);
 
         // 존재하지 않는 유저의 세션을 통해서는 todolist에 접근할 수 없다.
         mockMvc.perform(get("/todolist").session((MockHttpSession) httpSession))
@@ -239,14 +242,15 @@ public class LoginControllerTest {
     @Test
     public void test008LoginCookieTest() throws Exception {
         Cookie[] httpCookie = mockMvc.perform(formLogin().user("user1234").password("12345@A"))
-                                     .andDo(print())
-                                     .andExpect(authenticated())
-                                     .andReturn()
-                                     .getRequest()
-                                     .getCookies();
+                .andDo(print())
+                .andExpect(authenticated())
+                .andReturn()
+                .getRequest()
+                .getCookies();
 
         assertThat(httpCookie).isNull();
     }
+
 
 
 }

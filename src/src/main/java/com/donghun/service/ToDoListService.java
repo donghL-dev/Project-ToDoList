@@ -34,15 +34,15 @@ public class ToDoListService {
         toDoListRepository.save(toDoList);
     }
 
-    public void putToDoList(Integer idx, ToDoList toDoList) {
+    public void putToDoList(Integer idx, String description) {
         ToDoList persistToDoList = toDoListRepository.getOne(idx);
-        persistToDoList.update2(toDoList);
+        persistToDoList.update2(description);
         toDoListRepository.save(persistToDoList);
     }
 
-    public void putStatusToDoList(Integer idx, ToDoList toDoList) {
+    public void putStatusToDoList(Integer idx) {
         ToDoList persistToDoList = toDoListRepository.getOne(idx);
-        persistToDoList.StatusUpdate(toDoList);
+        persistToDoList.StatusUpdate(persistToDoList.getStatus());
         toDoListRepository.save(persistToDoList);
     }
 
