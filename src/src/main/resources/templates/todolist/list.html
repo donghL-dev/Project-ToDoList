@@ -25,7 +25,7 @@
     <h3>To do</h3>
     <ul>
         <li th:each="todoList : ${todoList}" th:if="${todoList.status == false}">
-            <h4  th:id="todo_description+${todoList.idx}" contenteditable="false" th:value="${todoList.idx}" style="width: 600px; margin-right: 10px; padding: 10px 13px 10px; word-break: break-all" th:href="'/todolist?idx='+${todoList.idx}" th:text="${todoList.description}" ></h4>
+            <h4  th:id="todo_description+${todoList.idx}" class="content" contenteditable="false" th:value="${todoList.idx}" style="width: 600px; margin-right: 10px; padding: 10px 13px 10px; word-break: break-all" th:href="'/todolist?idx='+${todoList.idx}" th:text="${todoList.description}" ></h4>
             <span style="float: right"><h5 style="float: right" th:text="${todoList.createdDate} ? ${#temporals.format(todoList.createdDate,'yyyy-MM-dd')} : ${todoList.createdDate}" ></h5></span>
             <div clss="todo_function" style="float: right; height: 1%; margin-bottom: 5%">
                 <button class="checkbox1" th:value="${todoList.idx}" style="width: 35px; margin-bottom: 20px"><i class="material-icons" style="margin-bottom: 20px">check_box_outline_blank</i></button></span>
@@ -90,8 +90,8 @@
     <div th:replace="layout/footer::footer"></div>
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
-    <script th:src="@{/js/list.js?ver=21}"></script>
-    <script th:src="@{/js/comment.js?ver=24}"></script>
+    <script th:src="@{/js/list.js?ver=25331}"></script>
+    <script th:src="@{/js/comment.js?ver=1234}"></script>
 
 </body>
 </html>

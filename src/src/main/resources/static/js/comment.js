@@ -148,15 +148,13 @@ $(document).on("click",".comment_edit",function() {
         button.appendChild(i);
 
         editBtn.replaceWith(button);
-        var jsonData = JSON.stringify({
-            content: comment_content.text()
-        });
+
         $.ajax({
             url: "/comment/" + $(this).val(),
             type: "PUT",
-            data: jsonData,
+            data: comment_content.text(),
             contentType: "application/json",
-            dataType: "json",
+            dataType: "text",
             success: function () {
                 console.log('수정 완료');
             },
@@ -202,15 +200,11 @@ $(document).on("click",".checkbox3",function() {
     button.appendChild(i);
 
     var comment_ul = $(this).parent().parent().parent().parent().find('#comment_ul');
-    var jsonData = JSON.stringify({
-        status: true
-    });
+
     $.ajax({
         url: "/comment/status/" + $(this).val(),
         type: "PUT",
-        data: jsonData,
         contentType: "application/json",
-        dataType: "json",
         success: function () {
             editbtn.css('display', 'none');
             checkboxbtn.replaceWith(button);
@@ -242,15 +236,11 @@ $(document).on("click",".checkbox4",function() {
     button.appendChild(i);
 
     var comment_ul = $(this).parent().parent().parent().parent().find('#comment_ul');
-    var jsonData2 = JSON.stringify({
-        status: false
-    });
+
     $.ajax({
         url: "/comment/status/" + $(this).val(),
         type: "PUT",
-        data: jsonData2,
         contentType: "application/json",
-        dataType: "json",
         success: function () {
             editbtn.css('display', 'inline');
             checkboxbtn.replaceWith(button);
