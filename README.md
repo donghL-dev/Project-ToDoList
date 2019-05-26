@@ -12,6 +12,8 @@ Prjoect - To Do List
 
   * Spring Security 학습 및 로그인, 회원가입 구현.
 
+  * JUnit 프레임워크를 이용하여 프로젝트 내에서 테스트 해야할 케이스들의 테스트 코드 작성 및 학습.
+
   * 인원 : [민경환](https://www.github.com/ber01), [박동현](https://www.github.com/pdh6547), [신무곤](https://www.github.com/mkshin96), [신재홍](https://www.github.com/woghd9072), [양기석](https://www.github.com/yks095), [엄태균](https://www.github.com/etg6550), [임동훈](https://www.github.com/dongh9508), [최광민](https://www.github.com/rhkd4560), [하상엽](https://www.github.com/hagome0)
 
 ## 개발환경
