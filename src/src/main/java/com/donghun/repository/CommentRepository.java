@@ -1,11 +1,12 @@
 package com.donghun.repository;
 
 import com.donghun.domain.Comment;
-import com.donghun.domain.ToDoList;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
+/**
+ * @author dongh9508
+ * @since  2019-04-20
+ */
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    List<Comment> findByToDoListOrderByIdx(ToDoList toDoList);
+    Comment findByContent(String content);
 }

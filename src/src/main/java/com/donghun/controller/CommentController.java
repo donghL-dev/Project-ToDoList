@@ -48,8 +48,14 @@ public class CommentController {
     }
 
     @PutMapping("/{idx}")
-    public ResponseEntity<?> putContent(@PathVariable("idx")Long idx, @RequestBody String comment) {
-        commentService.putComment(idx, comment);
+    public ResponseEntity<?> putContent(@PathVariable("idx")Long idx, @RequestBody @Valid CommentDTO commentDTO,
+                                        BindingResult result) {
+        if(result.hasErrors()) {
+            StringBuilder msg = commentService.validation(result);
+            return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+        }
+
+        commentService.putComment(idx, commentDTO.getContent());
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 

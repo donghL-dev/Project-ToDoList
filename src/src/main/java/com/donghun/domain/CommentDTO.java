@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class CommentDTO {
 
     @NotBlank
-    @Length(min = 1)
+    @Length(min = 1, max = 10, message = "Comment는 1~10 내에서 작셩해야 합니다.")
     private String content;
 
     private Integer todolistIdx;

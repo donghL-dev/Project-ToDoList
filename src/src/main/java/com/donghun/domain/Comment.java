@@ -1,6 +1,7 @@
 package com.donghun.domain;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ public class Comment implements Comparable<Comment> {
     private Long idx;
 
     @Column(nullable = false)
+    @Length(min = 1, max = 10, message = "Comment는 1~10 내에서 작셩해야 합니다.")
     private String content;
 
     @Column

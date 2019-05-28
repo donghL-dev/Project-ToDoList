@@ -46,7 +46,7 @@ public class ToDoList implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "toDoList", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     List<Comment> comments = new ArrayList<>();
 
     @Builder

@@ -817,4 +817,32 @@ Prjoect - To Do List
 
           * DB에서 변경된 description 확인. 
 
+### prjoect-day-24
+
+  * [#8](https://github.com/dongh9508/Project-ToDoList/issues/8) 이슈 처리 및 개선사항 Master Branch로 합병.
+
+    * [#8](https://github.com/dongh9508/Project-ToDoList/issues/8) 이슈인 로그인 테스트 코드 작성 완료.
+
+    * Comment 등록.
+
+      * 등록 요청 성공 및 DB 내 등록 여부 확인 .
+
+      * 내용 등록 시 길이(빈 문자열, 최대 글자 초과) 검사.
+
+      * ToDo 와의 관계성 확인(ToDoListIdx에 대한 List의 갯수).
+
+    * Comment 완료.
+
+      * 완료 요청 성공 및 DB 내 상태 변경 및 완료 날짜 확인.
+
+    *  Comment 수정
+
+        * 내용 등록 길이(빈 문자열, 최대 글자 초과) 검사.
+
+        * 수정 요청 성공 및 DB 안의 수정 내용 및 수정 날짜 확인.
+
+    * Comment 삭제
+
+      * 삭제 요청 성공 및 DB 내 삭제 여부 확인.
+
 </details>
