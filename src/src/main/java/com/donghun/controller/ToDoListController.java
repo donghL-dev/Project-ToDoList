@@ -56,8 +56,14 @@ public class ToDoListController {
     }
 
     @PutMapping("/{idx}")
-    public ResponseEntity<?> putDescription(@PathVariable("idx")Integer idx, @RequestBody String description) {
-        toDoListService.putToDoList(idx, description);
+    public ResponseEntity<?> putDescription(@PathVariable("idx")Integer idx, @RequestBody @Valid ToDoList toDoList,
+                                            BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            StringBuilder msg = userService.validation(bindingResult);
+            return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+        }
+
+        toDoListService.putToDoList(idx, toDoList.getDescription());
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 

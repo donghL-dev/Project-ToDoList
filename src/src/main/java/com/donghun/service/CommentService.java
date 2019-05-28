@@ -31,11 +31,10 @@ public class CommentService {
     }
 
     public CommentDTO postComment(ToDoList toDoList, CommentDTO commentDTO) {
-        Comment comment = Comment.builder()
-                            .content(commentDTO.getContent())
-                            .status(false)
-                            .createdDate(LocalDateTime.now())
-                            .build();
+        Comment comment = new Comment();
+        comment.setContent(commentDTO.getContent());
+        comment.setStatus(false);
+        comment.setCreatedDate(LocalDateTime.now());
         toDoList.add(comment);
         commentRepository.save(comment);
         commentDTO.readCommentInfo(comment);

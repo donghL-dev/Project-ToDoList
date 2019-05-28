@@ -1,4 +1,4 @@
-package com.donghun.controller;
+package com.donghun.Login;
 
 import com.donghun.domain.User;
 import com.donghun.domain.UserDTO;
@@ -40,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class LoginControllerTest {
+public class LoginTest {
 
     @Autowired
     private WebApplicationContext context;

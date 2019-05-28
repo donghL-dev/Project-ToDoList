@@ -108,6 +108,7 @@ $(document).on("click",".comment_edit",function() {
     var comment_delete_btn = $(this).parent().find('.comment_delete');
     var comment_checkbox_btn = $(this).parent().find('.checkbox3');
     var date = new Date();
+    var backup_content = comment_content.text();
 
     comment_days.text(date.getFullYear() + "-" + ( date.getMonth() + 1 > 9 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1)  ) + "-" + date.getDate());
 
@@ -134,37 +135,63 @@ $(document).on("click",".comment_edit",function() {
 
     $(document).on("click", ".comment_edit2", function() {
         var editBtn = $(this);
+        var content = comment_content.text();
 
-        var button = document.createElement('button');
-        button.style.width = "35px";
-        button.className = "comment_edit";
-        button.value = $(this).val();
+        if(content.length > 0 && content.length < 10) {
 
-        var i = document.createElement('i');
-        i.style.marginBottom = "20px";
-        i.className = "material-icons";
-        i.appendChild(document.createTextNode("edit"));
+            var jsonData = JSON.stringify({
+                content: comment_content.text()
+            });
 
-        button.appendChild(i);
+            var button = document.createElement('button');
+            button.style.width = "35px";
+            button.className = "comment_edit";
+            button.value = $(this).val();
 
-        editBtn.replaceWith(button);
+            var i = document.createElement('i');
+            i.style.marginBottom = "20px";
+            i.className = "material-icons";
+            i.appendChild(document.createTextNode("edit"));
 
-        $.ajax({
-            url: "/comment/" + $(this).val(),
-            type: "PUT",
-            data: comment_content.text(),
-            contentType: "application/json",
-            dataType: "text",
-            success: function () {
-                console.log('수정 완료');
-            },
-            error: function () {
-                alert('수정 실패!');
-            }
-        });
-        comment_delete_btn.css('visibility', 'visible');
-        comment_checkbox_btn.css('visibility', 'visible');
-        comment_content.attr('contenteditable', false);
+            button.appendChild(i);
+
+            editBtn.replaceWith(button);
+
+            $.ajax({
+                url: "/comment/" + $(this).val(),
+                type: "PUT",
+                data: jsonData,
+                contentType: "application/json",
+                dataType: "json",
+                success: function () {
+                    console.log('수정 완료');
+                },
+                error: function (request) {
+                    alert(request.responseText);
+                }
+            });
+            comment_delete_btn.css('visibility', 'visible');
+            comment_checkbox_btn.css('visibility', 'visible');
+            comment_content.attr('contenteditable', false);
+        }
+        else {
+            alert("Comment는 1~9 내에서 작성하셔야 합니다.");
+            comment_content.text(backup_content);
+
+            var button = document.createElement('button');
+            button.style.width = "35px";
+            button.className = "comment_edit";
+            button.value = $(this).val();
+
+            var i = document.createElement('i');
+            i.style.marginBottom = "20px";
+            i.className = "material-icons";
+            i.appendChild(document.createTextNode("edit"));
+
+            button.appendChild(i);
+
+            editBtn.replaceWith(button);
+        }
     });
 });
 

@@ -1,4 +1,4 @@
-package com.donghun.controller;
+package com.donghun.Register;
 
 import com.donghun.domain.User;
 import com.donghun.domain.UserDTO;
@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RegisterControllerTest {
+public class RegisterTest {
 
     @Autowired
     private MockMvc mockMvc;

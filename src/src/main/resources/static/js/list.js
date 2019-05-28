@@ -28,17 +28,23 @@ $('.edit').click(function () {
     edit_btn_icon.text('done');
 
     $('.edit').click(function () {
+
+        var jsonData = JSON.stringify({
+            description: $('#todo_description' + $(this).val()).text()
+        });
+
         $.ajax({
             url: "/todolist/" + $(this).val(),
             type: "PUT",
-            data: $('#todo_description' + $(this).val()).text(),
+            data: jsonData,
             contentType: "application/json",
-            dataType: "text",
+            dataType: "json",
             success: function () {
                 location.reload();
             },
-            error: function () {
-                alert('수정 실패!');
+            error: function (request) {
+                alert(request.responseText);
+                location.reload();
             }
         });
         $('#todo_description' + $(this).val()).attr('contenteditable', false);
