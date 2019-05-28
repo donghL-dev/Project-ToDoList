@@ -817,7 +817,7 @@ Prjoect - To Do List
 
           * DB에서 변경된 description 확인. 
 
-### prjoect-day-24
+### prjoect-day-26
 
   * [#8](https://github.com/dongh9508/Project-ToDoList/issues/8) 이슈 처리 및 개선사항 Master Branch로 합병.
 
