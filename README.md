@@ -4,7 +4,7 @@ Prjoect - To Do List
 
 * 이 저장소는 To Do List 프로젝트를 진행하면서 소스코드를 관리하고 버전관리를 위한 저장소입니다.
 
-* 프로젝트 배포 URL : http://dongh08.iptime.org:8081
+* 프로젝트 배포 URL : http://dongh9508.hopto.org:8081
 
 * 목적 및 인원
   
