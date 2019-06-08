@@ -76,11 +76,36 @@ button:hover {
     opacity: 0.8;
 }
 
+.loginBtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 5px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
 .cancelbtn {
-    width: auto;
-    padding: 10px 18px;
+    color: white;
+    padding: 14px 20px;
+    margin: 5px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
     background-color: #f44336;
 }
+
+.forgotbtn {
+    color: white;
+    padding: 14px 20px;
+    margin: 5px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    background-color: #666666;
+}
+
 
 .imgcontainer {
     text-align: center;
@@ -118,3 +143,4 @@ span.psw {
     height: 30%;
     margin: auto;
 }
+

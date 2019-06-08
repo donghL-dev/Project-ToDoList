@@ -37,12 +37,15 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile("org.springframework.boot:spring-boot-starter-security")
     compile('org.springframework.boot:spring-boot-starter-validation')
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    compile fileTree(dir: 'libs', include: '*.jar')
     runtime('com.h2database:h2')
     runtime('mysql:mysql-connector-java')
     runtime('org.springframework.boot:spring-boot-devtools')
     compileOnly('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.springframework.security:spring-security-test')
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     compile('org.springframework.boot:spring-boot-starter-web'){
         exclude module: "jackson-databind"
     }
