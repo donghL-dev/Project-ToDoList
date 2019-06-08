@@ -3,11 +3,17 @@
 <head>
     <title>Todo Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/css/form.css}" />
+    <link rel="stylesheet" th:href="@{/css/form.css?before}"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
           xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-</head>
+    </head>
+    <style>
+        .city {
+            display: none
+        }
+    </style>
 <body>
 
 <div th:replace="layout/header::header"></div>
@@ -34,16 +40,93 @@
                     <input id="password" type="password" placeholder="Enter Password" name="password" required>
                     <p class="vaild_error" id="login_pw" style="margin: 3px 0 10px 0"></p>
 
-                    <button id="login" type="submit">Login</button>
-                    <p class="vaild_error" id="login_error" style="margin: 3px 0 10px 0"></p>
+                    <button id="login" class="loginBtn" type="submit">Login</button>
+                    <button type="button" class="cancelbtn" onclick="moveRegister()">Register</button>
+                    <button onclick="document.getElementById('id01').style.display='block'" type="button"
+                            class="forgotbtn" id="forgotbtnId">Forgot Account?</button>
                 </div>
             </form>
-            <div class="container" style="background-color:#f1f1f1">
-                <button type="button" class="cancelbtn" onclick="moveRegister()">Register</button>
-            </div>
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+        <header class="w3-container w3-blue">
+                <span onclick="document.getElementById('id01').style.display='none'"
+                      class="w3-button w3-blue w3-xlarge w3-display-topright">&times;</span>
+            <h2>Forgot Account</h2>
+        </header>
+
+        <div class="w3-bar w3-border-bottom">
+            <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'ForgotId')">Forgot Id?</button>
+            <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'ForgotPW')">Forgot PW?</button>
+        </div>
+
+        <div id="ForgotId" class="w3-container city">
+            <div class="container">
+                <h3>아이디를 찾기 위해서는 이메일을 입력해야 합니다.</h3>
+                <h4>가입된 이메일일 경우, 아이디가 이메일로 전송됩니다.</h4>
+                <label for="uname"><b>Email</b></label>
+                <input id="forgot_id_email" type="email" placeholder="Enter Email" name="email" required>
+                <p class="vaild_error" id="forgot_email" style="margin: 3px 0 10px 0"></p>
+
+                <button id="forgot_id_Btn" type="button">Send Email</button>
+            </div>
+        </div>
+
+        <div id="ForgotPW" class="w3-container city">
+            <div class="container">
+                <div id="forgot_pw_view1">
+                    <h3>비밀번호를 찾기 위해서는 아이디와 이메일을 입력해야 합니다.</h3>
+                    <h4>가입된 아이디와 이메일일 경우, 인증번호가 이메일로 전송됩니다.</h4>
+                    <label for="uname"><b>Username</b></label>
+                    <input id="forgot_pw_id" type="text" placeholder="Enter Username" name="uname" required>
+                    <p class="vaild_error" id="forgot_pw_id_vaild" style="margin: 3px 0 10px 0"></p>
+
+                    <label for="uname"><b>Email</b></label>
+                    <input id="forgot_pw_email" type="email" placeholder="Enter Email" name="email" required>
+                    <p class="vaild_error" id="forgot_pw_email_vaild" style="margin: 3px 0 10px 0"></p>
+
+                    <button id="forgot_pw_email_Btn" type="button">Send Email</button>
+                </div>
+
+                <div id="forgot_pw_view2" style="display: none">
+                    <h3>이메일로 전송된 인증번호를 입력해주시길 바랍니다.</h3>
+                    <h4>인증번호가 일치할 경우, 비밀번호를 새로 설정합니다.</h4>
+                    <label for="uname"><b>Certification Number</b></label>
+                    <input id="cnumber" type="text" placeholder="Enter Certification Number" name="Certification Number"
+                           required>
+
+                    <button id="forgot_pw_cnumber_Btn" type="button">Confirm Certification Number</button>
+                </div>
+
+                <div id="forgot_pw_view3" style="display: none">
+                    <h3>새롭게 사용할 비밀번호를 입력해주시길 바랍니다.</h3>
+                    <h4>비밀번호는 5~22의 영문 대소문자, 숫자, 특수문자로 사용해야합니다.</h4>
+                    <label for="uname"><b>New Password </b></label>
+                    <input id="forgot_pw_new" type="password" placeholder="Enter Password" name="uname" required>
+                    <p class="vaild_error" id="forgot_pw_new_vaild" style="margin: 3px 0 10px 0"></p>
+
+                    <label for="uname"><b>Confirm New Password</b></label>
+                    <input id="forgot_pw_new_check" type="password" placeholder="Enter Confirm Password" name="password" required>
+                    <p class="vaild_error" id="forgot_pw_new_check_vaild" style="margin: 3px 0 10px 0"></p>
+
+                    <button id="forgot_pw_new_Btn" type="button">Change the Password</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="w3-container w3-light-grey w3-padding">
+            <button class="w3-button w3-right w3-white w3-border"
+                    onclick="document.getElementById('id01').style.display='none'">Close
+            </button>
+        </div>
+    </div>
+</div>
+
+<!--  end Modal -->
 
 <footer style="height: 6%">
     <div class="footer_title">
@@ -51,35 +134,8 @@
     </div>
 </footer>
 
-<script>
-    function moveRegister() {
-        location.href = "/register";
-    }
-</script>
 <script th:src="@{/js/jquery.min.js}"></script>
-<script th:src="@{/js/list.js?ver=5}"></script>
-<script>
-    $('#username').keyup(function () {
-        if($(this).val().length < 4) {
-            $("#login_id").text('아이디를 4자리 이상 입력하십시오.').css('color', 'red');
-            $('#login_id').show();
-        }
-        else {
-            $('#login_id').hide();
-        }
-    });
-
-    $('#password').keyup(function () {
-        if($(this).val().length < 5) {
-            $("#login_pw").text('비밀번호를 5자리 이상 입력하십시오.').css('color', 'red');
-            $('#login_pw').show();
-        }
-        else {
-            $('#login_pw').hide();
-        }
-    });
-
-</script>
+<script th:src="@{/js/login.js?ver=23}"></script>
 
 </body>
 </html>
