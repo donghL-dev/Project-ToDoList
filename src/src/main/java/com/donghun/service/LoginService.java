@@ -1,19 +1,28 @@
 package com.donghun.service;
 
+import com.donghun.domain.FindPasswordDTO;
 import com.donghun.domain.User;
-import com.donghun.domain.UserDTO;
 import com.donghun.repository.UserRepository;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * @author dongh9508
+ * @since  2019-06-08
+ */
 @Service
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class LoginService {
 
     @Autowired
@@ -22,7 +31,9 @@ public class LoginService {
     @Autowired
     private UserRepository userRepository;
 
-    private Map<String, Integer> map = new HashMap<>();
+    private String id;
+
+    private Integer cnumber;
 
     public void sendMailId(String email, String username) {
         SimpleMailMessage msg = new SimpleMailMessage();
@@ -36,25 +47,24 @@ public class LoginService {
     public void sendMailPW(String email, String username) {
         SimpleMailMessage msg = new SimpleMailMessage();
         Random random = new Random();
-        int cnumber = random.nextInt(9999 - 1111 + 1) + 1111;
+        this.cnumber = random.nextInt(9999 - 1111 + 1) + 1111;
+        this.id = username;
 
-        map.put(username, cnumber);
         msg.setFrom("dongh9508@gmail.com");
         msg.setTo(email);
         msg.setSubject("회신이 불가능한 메일입니다.");
-        msg.setText("Certification Number : " + cnumber);
+        msg.setText("Certification Number : " + this.cnumber);
         this.sender.send(msg);
     }
 
-    public Boolean cnumberCompare(String username, Integer cnumber) {
-        Integer original_cnumber = map.get(username);
-        return original_cnumber.equals(cnumber);
+    public Boolean cnumberCompare(Integer cnumber) {
+        return this.cnumber.equals(cnumber);
     }
 
-    public void passwordChange(UserDTO userDTO) {
-        User user = userRepository.findById(userDTO.getId());
+    public void passwordChange(String password) {
+        User user = userRepository.findById(this.id);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
     }
 }
