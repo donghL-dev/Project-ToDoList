@@ -1,9 +1,11 @@
 package com.donghun.controller;
 
+import com.donghun.domain.FindPasswordDTO;
 import com.donghun.domain.UserDTO;
 import com.donghun.service.LoginService;
 import com.donghun.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -24,10 +26,10 @@ import java.util.Map;
 public class LoginController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    LoginService loginService;
+    private LoginService loginService;
 
     @GetMapping("/")
     public String root() {
@@ -59,33 +61,35 @@ public class LoginController {
     }
 
     @PostMapping("/login/emailsendPW")
-    public ResponseEntity<?> emailSendPW(@RequestBody UserDTO userDTO) {
-        String username = userService.findUserEmail(userDTO.getEmail()).getId();
+    public ResponseEntity<?> emailSendPW(@RequestBody Map<String, String> map) {
+        String username = userService.findUserEmail(map.get("email")).getId();
 
-        if(!username.equals(userDTO.getId()))
+        if(!username.equals(map.get("id")))
             return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
 
-        loginService.sendMailPW(userDTO.getEmail(), username);
+        loginService.sendMailPW(map.get("email"), username);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
     @PostMapping("/login/cnumberVaild")
-    public ResponseEntity<?> cnumberVaild(@RequestBody Map<String, String> map) {
-        String username = map.get("id");
-        Integer cnumber = Integer.valueOf(map.get("cnumber"));
+    public ResponseEntity<?> cnumberVaild(@RequestBody String number) {
+        Integer cnumber = Integer.valueOf(number);
 
-        return loginService.cnumberCompare(username, cnumber) ? new ResponseEntity<>("{}", HttpStatus.OK) :
+        return loginService.cnumberCompare(cnumber) ? new ResponseEntity<>("{}", HttpStatus.OK) :
                 new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/login/newPW")
-    public ResponseEntity<?> newPWChange(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult) {
+    public ResponseEntity<?> newPWChange(@Valid @RequestBody FindPasswordDTO find, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder msg = userService.validation(bindingResult);
             return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
         }
+        else if(!find.getPassword().equals(find.getConfirmPassword())) {
+            return new ResponseEntity<>("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+        }
 
-        loginService.passwordChange(userDTO);
+        loginService.passwordChange(find.getPassword());
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 }

@@ -171,17 +171,12 @@ $('#forgot_pw_email_Btn').click(function () {
 });
 
 $('#forgot_pw_cnumber_Btn').click(function () {
-    var jsonData = JSON.stringify({
-        id: $('#forgot_pw_id').val(),
-        cnumber: $('#cnumber').val()
-    });
-
     $.ajax({
         url: "/login/cnumberVaild",
         type: "POST",
-        data: jsonData,
+        data: $('#cnumber').val(),
         contentType: "application/json",
-        dataType: "json",
+        dataType: "text",
         success: function () {
             alert("인증번호가 일치합니다.");
             $('#forgot_pw_view2').css('display', 'none');
@@ -236,9 +231,8 @@ $('#forgot_pw_new_check').keyup(function () {
 
 $('#forgot_pw_new_Btn').click(function () {
     var jsonData = JSON.stringify({
-        id: $('#forgot_pw_id').val(),
-        password: $('#forgot_pw_new').val(),
-        email: "testuser@testnet.com"
+        confirmPassword: $('#forgot_pw_new_check').val(),
+        password: $('#forgot_pw_new').val()
     });
     if(new_pw_vaild && new_pw_vaild_check) {
         $.ajax({
