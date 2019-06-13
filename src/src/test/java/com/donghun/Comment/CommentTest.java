@@ -125,6 +125,7 @@ public class CommentTest {
                 .with(user(userDetails)))
                 .andExpect(authenticated())
                 .andExpect(status().isBadRequest());
+
     }
 
     @Test // Comment Post 매핑시 최대 길이 초과로 인한 등록 실패 테스트.

@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,6 +37,20 @@ public class LoginService {
 
     private Integer cnumber;
 
+    private Boolean status = false;
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Integer getCnumber() {
+        return cnumber;
+    }
+
     public void sendMailId(String email, String username) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("dongh9508@gmail.com");
@@ -58,13 +74,22 @@ public class LoginService {
     }
 
     public Boolean cnumberCompare(Integer cnumber) {
+
+        if (this.cnumber.equals(cnumber))
+            this.status = true;
         return this.cnumber.equals(cnumber);
     }
 
-    public void passwordChange(String password) {
+    public ResponseEntity<?> passwordChange(String password) {
+        if(!this.status) {
+            System.out.println("status의 상태는 = " + this.status);
+            return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
+        }
         User user = userRepository.findById(this.id);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
+
+        return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 }
