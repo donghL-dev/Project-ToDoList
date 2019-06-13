@@ -893,4 +893,6 @@ Prjoect - To Do List
 
         * 인증번호를 받고, 브라우저를 종료 후, 다시 접속해서 이전에 받은 인증번호를 이용하려 하면 인증이 되지 않는다.
 
+### 이 이후부터는 [Issues](https://github.com/dongh9508/Project-ToDoList/issues)에서 업데이트 사항들을 확인할 수 있습니다.
+
 </details>

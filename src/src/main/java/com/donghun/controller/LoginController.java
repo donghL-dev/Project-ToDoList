@@ -55,14 +55,25 @@ public class LoginController {
 
     @PostMapping("/login/emailsendId")
     public ResponseEntity<?> emailSendId(@RequestBody String email) {
-        String username = userService.findUserEmail(email).getId();
+        String username = null;
+
+        if(userService.findUserEmail(email) != null)
+            username = userService.findUserEmail(email).getId();
+        else
+            return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
+
         loginService.sendMailId(email, username);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
     @PostMapping("/login/emailsendPW")
     public ResponseEntity<?> emailSendPW(@RequestBody Map<String, String> map) {
-        String username = userService.findUserEmail(map.get("email")).getId();
+        String username = null;
+
+        if(userService.findUserEmail(map.get("email")) != null)
+            username = userService.findUserEmail(map.get("email")).getId();
+        else
+            return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
 
         if(!username.equals(map.get("id")))
             return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
@@ -89,7 +100,6 @@ public class LoginController {
             return new ResponseEntity<>("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
         }
 
-        loginService.passwordChange(find.getPassword());
-        return new ResponseEntity<>("{}", HttpStatus.OK);
+        return loginService.passwordChange(find.getPassword());
     }
 }
