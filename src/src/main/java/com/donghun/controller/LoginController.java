@@ -1,22 +1,22 @@
 package com.donghun.controller;
 
-import com.donghun.domain.FindPasswordDTO;
-import com.donghun.domain.UserDTO;
+import com.donghun.domain.*;
+import com.donghun.repository.PasswordResetTokenRepository;
 import com.donghun.service.LoginService;
 import com.donghun.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * @author dongh9508
@@ -30,6 +30,14 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private PasswordResetTokenRepository tokenRepository;
+
+    @ModelAttribute("passwordResetForm")
+    public PasswordResetDTO passwordReset() {
+        return new PasswordResetDTO();
+    }
 
     @GetMapping("/")
     public String root() {
@@ -66,40 +74,66 @@ public class LoginController {
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
-    @PostMapping("/login/emailsendPW")
-    public ResponseEntity<?> emailSendPW(@RequestBody Map<String, String> map) {
-        String username = null;
+    @PostMapping("/login/forgot-password")
+    public ResponseEntity<?> emailSendPW(@RequestBody @Valid PasswordForgotDTO passwordForgotDTO,
+                                         BindingResult result, HttpServletRequest request) {
+        if(result.hasErrors()) {
+            StringBuilder msg = userService.validation(result);
+            return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
+        }
 
-        if(userService.findUserEmail(map.get("email")) != null)
-            username = userService.findUserEmail(map.get("email")).getId();
-        else
+        User user = null;
+
+        if(userService.findUserEmail(passwordForgotDTO.getEmail()) != null) {
+            user = userService.findUserEmail(passwordForgotDTO.getEmail());
+        }
+        else {
             return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
+        }
 
-        if(!username.equals(map.get("id")))
-            return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
+        PasswordResetToken token = new PasswordResetToken();
+        token.setToken(UUID.randomUUID().toString());
+        token.setUser(user);
+        token.setExpiryDate(30);
+        tokenRepository.save(token);
 
-        loginService.sendMailPW(map.get("email"), username);
+        Mail mail = new Mail();
+        loginService.sendMailPW(mail, token, user, request);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
-    @PostMapping("/login/cnumberVaild")
-    public ResponseEntity<?> cnumberVaild(@RequestBody String number) {
-        Integer cnumber = Integer.valueOf(number);
+    @GetMapping("/login/reset-password")
+    public String displayResetPasswordPage(@RequestParam(required = false) String token, Model model) {
 
-        return loginService.cnumberCompare(cnumber) ? new ResponseEntity<>("{}", HttpStatus.OK) :
-                new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
+        PasswordResetToken resetToken = null;
+
+        if(tokenRepository.findByToken(token) != null)
+            resetToken = tokenRepository.findByToken(token);
+
+        if(resetToken == null) {
+            model.addAttribute("error", "Could not find password reset token.");
+        } else if(resetToken.isExpired()) {
+            model.addAttribute("error", "Token has expired, please request a new password reset.");
+        } else {
+            model.addAttribute("token", resetToken.getToken());
+        }
+
+        return "todolist/reset-password";
     }
 
-    @PostMapping("/login/newPW")
-    public ResponseEntity<?> newPWChange(@Valid @RequestBody FindPasswordDTO find, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
-            StringBuilder msg = userService.validation(bindingResult);
+    @PostMapping("/login/reset-password")
+    @Transactional
+    public ResponseEntity<?> handlePasswordReset(@RequestBody @Valid PasswordResetDTO form, BindingResult result) {
+
+        if(result.hasErrors()) {
+            StringBuilder msg = userService.validation(result);
             return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
-        }
-        else if(!find.getPassword().equals(find.getConfirmPassword())) {
+        } else if(!form.getPassword().equals(form.getConfirmPassword())) {
             return new ResponseEntity<>("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
         }
 
-        return loginService.passwordChange(find.getPassword());
+        return loginService.updatePassword(form);
     }
+
+
 }

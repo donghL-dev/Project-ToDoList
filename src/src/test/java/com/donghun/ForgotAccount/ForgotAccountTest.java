@@ -1,7 +1,6 @@
 package com.donghun.ForgotAccount;
 
-import com.donghun.domain.FindPasswordDTO;
-import com.donghun.service.LoginService;
+import com.donghun.domain.PasswordForgotDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,9 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.servlet.http.HttpSession;
-
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +21,6 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -191,60 +186,60 @@ public class ForgotAccountTest {
                 .andExpect(status().isBadRequest());
     }
 
-    @Test // 인증번호 일치 후, 비밀번호 리셋 진행 중, 비밀번호가 올바르지 않을 때의 테스트.
-    public void test013PasswordRestInvaild() throws Exception {
-        MockHttpSession mockHttpSession = new MockHttpSession();
-        FindPasswordDTO find = new FindPasswordDTO();
-        find.setPassword("");
-        find.setConfirmPassword("");
-
-
-        // 비밀번호가 공백일 떄의 테스트.
-        mockMvc.perform(post("/login/newPW")
-                .session(mockHttpSession)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(find)))
-                .andExpect(status().isBadRequest());
-
-        find.setPassword("123asd");
-        find.setConfirmPassword("123asd");
-
-        // 비밀번호가 올바른 형식으로 입력하지 않았을 때의 테스트.
-        mockMvc.perform(post("/login/newPW")
-                .session(mockHttpSession)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(find)))
-                .andExpect(status().isBadRequest());
-
-        find.setPassword("12a@");
-        find.setConfirmPassword("12a@");
-
-        // 비밀번호가 5자리 미만일 때의 테스트.
-        mockMvc.perform(post("/login/newPW")
-                .session(mockHttpSession)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(find)))
-                .andExpect(status().isBadRequest());
-
-        find.setPassword("abcdefgkiaosldnslwlslsleiaksnjdi2345667756423442@#!$%^&*");
-        find.setConfirmPassword("abcdefgkiaosldnslwlslsleiaksnjdi2345667756423442@#!$%^&*");
-
-        // 비밀번호가 22자리 이상일 때의 테스트.
-        mockMvc.perform(post("/login/newPW")
-                .session(mockHttpSession)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(find)))
-                .andExpect(status().isBadRequest());
-
-        find.setPassword("123455asdf@#$");
-        find.setConfirmPassword("1234asd@$%^&");
-
-        // 비밀번호와 비밀번호 재확인 부분이 일치하지 않을 때의 테스트.
-        mockMvc.perform(post("/login/newPW")
-                .session(mockHttpSession)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(find)))
-                .andExpect(status().isBadRequest());
-    }
+//    @Test // 인증번호 일치 후, 비밀번호 리셋 진행 중, 비밀번호가 올바르지 않을 때의 테스트.
+//    public void test013PasswordRestInvaild() throws Exception {
+//        MockHttpSession mockHttpSession = new MockHttpSession();
+//        PasswordForgotDTO find = new PasswordForgotDTO();
+//        find.setPassword("");
+//        find.setConfirmPassword("");
+//
+//
+//        // 비밀번호가 공백일 떄의 테스트.
+//        mockMvc.perform(post("/login/newPW")
+//                .session(mockHttpSession)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(objectMapper.writeValueAsString(find)))
+//                .andExpect(status().isBadRequest());
+//
+//        find.setPassword("123asd");
+//        find.setConfirmPassword("123asd");
+//
+//        // 비밀번호가 올바른 형식으로 입력하지 않았을 때의 테스트.
+//        mockMvc.perform(post("/login/newPW")
+//                .session(mockHttpSession)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(objectMapper.writeValueAsString(find)))
+//                .andExpect(status().isBadRequest());
+//
+//        find.setPassword("12a@");
+//        find.setConfirmPassword("12a@");
+//
+//        // 비밀번호가 5자리 미만일 때의 테스트.
+//        mockMvc.perform(post("/login/newPW")
+//                .session(mockHttpSession)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(objectMapper.writeValueAsString(find)))
+//                .andExpect(status().isBadRequest());
+//
+//        find.setPassword("abcdefgkiaosldnslwlslsleiaksnjdi2345667756423442@#!$%^&*");
+//        find.setConfirmPassword("abcdefgkiaosldnslwlslsleiaksnjdi2345667756423442@#!$%^&*");
+//
+//        // 비밀번호가 22자리 이상일 때의 테스트.
+//        mockMvc.perform(post("/login/newPW")
+//                .session(mockHttpSession)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(objectMapper.writeValueAsString(find)))
+//                .andExpect(status().isBadRequest());
+//
+//        find.setPassword("123455asdf@#$");
+//        find.setConfirmPassword("1234asd@$%^&");
+//
+//        // 비밀번호와 비밀번호 재확인 부분이 일치하지 않을 때의 테스트.
+//        mockMvc.perform(post("/login/newPW")
+//                .session(mockHttpSession)
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(objectMapper.writeValueAsString(find)))
+//                .andExpect(status().isBadRequest());
+//    }
 
 }

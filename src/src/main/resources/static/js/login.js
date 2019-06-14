@@ -21,7 +21,6 @@ $('#password').keyup(function () {
     }
 });
 
-document.getElementsByClassName("tablink")[0].click();
 var email_check = false;
 
 function openCity(evt, cityName) {
@@ -69,7 +68,7 @@ $('#forgot_id_email').keyup(function () {
 
 $('#forgot_id_Btn').click(function () {
     if (email_check) {
-        alert("메일이 전송중이니 잠시만 기다려주시길 바랍니다.");
+        alert("메일을 전송중이니 잠시만 기다려주시길 바랍니다.");
         $.ajax({
             url: "/login/emailsendId",
             type: "POST",
@@ -149,20 +148,19 @@ $('#forgot_pw_email_Btn').click(function () {
     });
 
     if (email_pw_check && id_pw_check) {
-        alert("메일이 전송을 위한, 아이디와 이메일 일치 여부를 확인을 위해 잠시만 기다려주시길 바랍니다.");
+        alert("메일 전송을 위한, 아이디와 이메일 일치 여부를 확인을 위해 잠시만 기다려주시길 바랍니다.");
         $.ajax({
-            url: "/login/emailsendPW",
+            url: "/login/forgot-password",
             type: "POST",
             data: jsonData,
             contentType: "application/json",
             dataType: "json",
             success: function () {
                 alert("메일이 성공적으로 전송되었습니다.");
-                $('#forgot_pw_view1').css('display', 'none');
-                $('#forgot_pw_view2').css('display', 'block');
+                location.reload();
             },
             error: function () {
-                alert("아이디와 이메일이 일치하지 않습니다.");
+                alert("메일 전송이 실패하였습니다.");
             }
         });
     } else {
@@ -170,23 +168,6 @@ $('#forgot_pw_email_Btn').click(function () {
     }
 });
 
-$('#forgot_pw_cnumber_Btn').click(function () {
-    $.ajax({
-        url: "/login/cnumberVaild",
-        type: "POST",
-        data: $('#cnumber').val(),
-        contentType: "application/json",
-        dataType: "text",
-        success: function () {
-            alert("인증번호가 일치합니다.");
-            $('#forgot_pw_view2').css('display', 'none');
-            $('#forgot_pw_view3').css('display', 'block');
-        },
-        error: function () {
-            alert("인증번호가 올바르지 않습니다.");
-        }
-    });
-});
 
 var new_pw_vaild = false;
 var new_pw_vaild_check = false;
@@ -205,7 +186,7 @@ $('#forgot_pw_new').keyup(function () {
     }
     else {
         $('#forgot_pw_new_vaild').text('사용가능한 비밀번호 입니다.').css('color', 'green');
-        $('#forgot_pw_new_check_vaild').show();
+        $('#forgot_pw_new_vaild').show();
         new_pw_vaild = true;
     }
 });
@@ -231,21 +212,20 @@ $('#forgot_pw_new_check').keyup(function () {
 
 $('#forgot_pw_new_Btn').click(function () {
     var jsonData = JSON.stringify({
+        password: $('#forgot_pw_new').val(),
         confirmPassword: $('#forgot_pw_new_check').val(),
-        password: $('#forgot_pw_new').val()
+        token: $('#token').val()
     });
     if(new_pw_vaild && new_pw_vaild_check) {
         $.ajax({
-            url: "/login/newPW",
+            url: "/login/reset-password",
             type: "POST",
             data: jsonData,
             contentType: "application/json",
             dataType: "json",
             success: function () {
                 alert("비밀번호 재설정에 성공하였습니다.");
-                $('#forgot_pw_view3').css('display', 'none');
-                $('#forgot_pw_view1').css('display', 'block');
-                location.reload();
+                location.href = '/login';
             },
             error: function (parm) {
                 alert(parm.responseText);

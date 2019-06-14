@@ -112,10 +112,20 @@ button:hover {
     margin: 24px 0 12px 0;
 }
 
+.imgcontainer {
+    text-align: center;
+}
+
+
 img.avatar {
     width: 25%;
     height: 25%;
     border-radius: 50%;
+}
+
+img.avatar2 {
+    width: 35%;
+    height: 35%;
 }
 
 .container {
