@@ -34,11 +34,6 @@ public class LoginController {
     @Autowired
     private PasswordResetTokenRepository tokenRepository;
 
-    @ModelAttribute("passwordResetForm")
-    public PasswordResetDTO passwordReset() {
-        return new PasswordResetDTO();
-    }
-
     @GetMapping("/")
     public String root() {
         return "redirect:/todolist";
@@ -75,7 +70,7 @@ public class LoginController {
     }
 
     @PostMapping("/login/forgot-password")
-    public ResponseEntity<?> emailSendPW(@RequestBody @Valid PasswordForgotDTO passwordForgotDTO,
+    public ResponseEntity<?> emailSendPW(@RequestBody @Valid PasswordForgotDTO ForgotDTO,
                                          BindingResult result, HttpServletRequest request) {
         if(result.hasErrors()) {
             StringBuilder msg = userService.validation(result);
@@ -84,8 +79,10 @@ public class LoginController {
 
         User user = null;
 
-        if(userService.findUserEmail(passwordForgotDTO.getEmail()) != null) {
-            user = userService.findUserEmail(passwordForgotDTO.getEmail());
+        if(userService.findUserEmail(ForgotDTO.getEmail()) != null && userService.findUserId(ForgotDTO.getId()) != null) {
+            user = userService.findUserEmail(ForgotDTO.getEmail());
+            if(!user.getId().equals(userService.findUserId(ForgotDTO.getId()).getId()))
+                return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
         }
         else {
             return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
@@ -94,7 +91,7 @@ public class LoginController {
         PasswordResetToken token = new PasswordResetToken();
         token.setToken(UUID.randomUUID().toString());
         token.setUser(user);
-        token.setExpiryDate(30);
+        token.setExpiryDate(10);
         tokenRepository.save(token);
 
         Mail mail = new Mail();

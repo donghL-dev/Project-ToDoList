@@ -42,7 +42,7 @@ footer {
     vertical-align: center;
     text-align: center;
     color: whitesmoke;
-    font-size: 20px;
+    font-size: 17px;
 }
 
 #lgoinform {border: 3px solid #f1f1f1;}
@@ -114,6 +114,7 @@ button:hover {
 
 .imgcontainer {
     text-align: center;
+    margin: 24px 0 12px 0;
 }
 
 

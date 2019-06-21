@@ -92,14 +92,21 @@ public class LoginService {
 
         if(tokenRepository.findByToken(form.getToken()) != null) {
             token = tokenRepository.findByToken(form.getToken());
+            if(token.isExpired()) {
+                tokenRepository.delete(token);
+                return new ResponseEntity<>("Token has expired, please request a new password reset.",
+                        HttpStatus.BAD_REQUEST);
+            }
         } else {
             String error = "올바르지 않은 접근으로 인해 정상적으로 비밀번호를 변경할 수 없습니다.";
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
         }
+
         User user = token.getUser();
         String updatePassword = passwordEncoder.encode(form.getPassword());
         userService.updatePassword(updatePassword, user.getIdx());
         tokenRepository.delete(token);
+
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 }
