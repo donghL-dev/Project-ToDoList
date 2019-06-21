@@ -3,6 +3,10 @@ function moveRegister() {
     location.href = "/register";
 }
 
+function moveLogin() {
+    location.href = "/lgoin";
+}
+
 $('#username').keyup(function () {
     if ($(this).val().length < 4) {
         $("#login_id").text('아이디를 4자리 이상 입력하십시오.').css('color', 'red');
