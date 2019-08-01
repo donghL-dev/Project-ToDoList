@@ -24,7 +24,7 @@ Prjoect - To Do List
 | OS |Windows 10|
 |IDE |IntelliJ IDEA Ultimate |
 |JDK |JDK 1.8|
-|DataBase |MySQL 8.0.3|
+|DataBase |MySQL Server 5.7|
 |Build Tool |Gradle 5.2.1|
 
 ## 주요기능 
