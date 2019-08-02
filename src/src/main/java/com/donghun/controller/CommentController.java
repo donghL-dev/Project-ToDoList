@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 
 /**
  * @author dongh9508
- * @since  2019-04-12
+ * @since 2019-04-12
  */
 @Controller
 @RequestMapping("/comment")
@@ -31,7 +31,7 @@ public class CommentController {
 
     @PostMapping
     public ResponseEntity<?> postComment(@RequestBody @Valid CommentDTO commentDTO, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             StringBuilder msg = commentService.validation(bindingResult);
             return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
         }
@@ -42,15 +42,15 @@ public class CommentController {
     }
 
     @PutMapping("/status/{idx}")
-    public ResponseEntity<?> putStatus(@PathVariable("idx")Long idx) {
+    public ResponseEntity<?> putStatus(@PathVariable("idx") Long idx) {
         commentService.putStatusComment(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
     @PutMapping("/{idx}")
-    public ResponseEntity<?> putContent(@PathVariable("idx")Long idx, @RequestBody @Valid CommentDTO commentDTO,
+    public ResponseEntity<?> putContent(@PathVariable("idx") Long idx, @RequestBody @Valid CommentDTO commentDTO,
                                         BindingResult result) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             StringBuilder msg = commentService.validation(result);
             return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
         }
@@ -60,7 +60,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/{idx}")
-    public ResponseEntity<?> deleteToDoList(@PathVariable("idx")Long idx) {
+    public ResponseEntity<?> deleteToDoList(@PathVariable("idx") Long idx) {
         commentService.deleteToDoList(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }

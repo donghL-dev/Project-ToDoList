@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * @author dongh9508
- * @since  2019-06-14
+ * @since 2019-06-14
  */
 @Entity
 @Table
@@ -36,7 +36,7 @@ public class PasswordResetToken {
         return new Date().after(expiryDate);
     }
 
-    public void setExpiryDate(int minutes){
+    public void setExpiryDate(int minutes) {
         Calendar now = Calendar.getInstance();
         now.add(Calendar.MINUTE, minutes);
         this.expiryDate = now.getTime();

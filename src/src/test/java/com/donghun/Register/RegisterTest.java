@@ -203,9 +203,9 @@ public class RegisterTest {
     }
 
     public ResultMatcher statusCheck(int status) {
-        if(status == 201)
+        if (status == 201)
             return status().isCreated();
-        else if(status == 403)
+        else if (status == 403)
             return status().isForbidden();
         else
             return status().isBadRequest();
@@ -215,7 +215,7 @@ public class RegisterTest {
         User user = userRepository.findById(userId);
 
         assertThat(user).isNotNull();
-        assertThat(user.getId()) .isEqualTo(userId);
+        assertThat(user.getId()).isEqualTo(userId);
         assertThat(user.getEmail()).isEqualTo(userEmail);
 
         userRepository.deleteById(user.getIdx());

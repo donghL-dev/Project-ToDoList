@@ -1,16 +1,24 @@
-
 $('.todocoet').click(function () {
     var status = $(this).val();
-    if(status) {
+    if (status) {
         var completeComment = $(this).parent().parent().find('#completeComment');
         completeComment.slideToggle('slow');
-    }
-    else {
+    } else {
         var todocomment = $(this).parent().parent().find('#todoComment');
         todocomment.slideToggle('slow');
     }
 
 });
+
+function openNav() {
+    document.getElementById("mySidenav").style.width = "15%";
+    document.getElementById("main").style.marginLeft = "15%";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+}
 
 $('.edit').click(function () {
 
@@ -115,9 +123,9 @@ $('.checkbox2').click(function () {
 
 function resize(obj) {
     obj.style.height = "1px";
-    obj.style.height = (12+obj.scrollHeight)+"px";
+    obj.style.height = (12 + obj.scrollHeight) + "px";
 }
 
 $(".mdl-textfield__input").on('keydown keyup', function () {
-    $(this).height(1).height( $(this).prop('scrollHeight')+12 );
+    $(this).height(1).height($(this).prop('scrollHeight') + 12);
 });

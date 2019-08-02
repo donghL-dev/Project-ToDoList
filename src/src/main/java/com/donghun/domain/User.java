@@ -4,23 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author dongh9508
- * @since  2019-03-29
+ * @since 2019-03-29
  */
-@Getter
-@Setter
+
 @Entity
 @NoArgsConstructor
-@ToString
+@Data
 @EqualsAndHashCode(of = "idx")
 public class User implements Serializable {
 

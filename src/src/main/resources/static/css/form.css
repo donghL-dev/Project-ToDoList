@@ -1,26 +1,31 @@
 
-body::after{ content:''; display:block; height:100px; }
+body::after {
+    content: '';
+    display: block;
+    height: 100px;
+}
 
 body {
     color: #333;
     font-family: Lato, sans-serif;
     position: relative;
     margin: 0;
-    min-height:100%;
+    min-height: 100%;
     overflow: auto;
     padding: 0;
     background-color: #f6f8fa;
 }
 
-html{
+html {
     height: 100%;
 }
 
-header{
+header {
     display: block;
     background-color: #24292e;
 }
-.headerTitle{
+
+.headerTitle {
     vertical-align: center;
     font-family: 'Merriweather', serif;
     text-align: center;
@@ -38,14 +43,16 @@ footer {
     background-color: #24292e;
 }
 
-.footer_title{
+.footer_title {
     vertical-align: center;
     text-align: center;
     color: whitesmoke;
     font-size: 17px;
 }
 
-#lgoinform {border: 3px solid #f1f1f1;}
+#lgoinform {
+    border: 3px solid #f1f1f1;
+}
 
 input[type=text], input[type=password], input[type=email] {
     width: 100%;
@@ -144,6 +151,7 @@ span.psw {
         display: block;
         float: none;
     }
+
     .cancelbtn {
         width: 100%;
     }

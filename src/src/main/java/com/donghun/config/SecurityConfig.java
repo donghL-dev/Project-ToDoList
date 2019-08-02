@@ -27,24 +27,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity webSecurity) throws Exception {
-        webSecurity.ignoring().antMatchers("/static/**" ,"/css/**", "/js/**", "/images/**", "/fonts/**");
+        webSecurity.ignoring().antMatchers("/static/**", "/css/**", "/js/**", "/images/**", "/fonts/**");
     }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/login/**", "/error", "/register/**").permitAll()
+                .antMatchers("/login/**", "/error", "/register/**", "/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                    .loginPage("/login")
+                .loginPage("/login")
                 .and()
                 .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login")
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
                 .and()
-                    .csrf()
-                    .disable();
+                .csrf()
+                .disable();
     }
 
     @Bean

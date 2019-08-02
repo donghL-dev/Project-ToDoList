@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+    <link rel="stylesheet" th:href="@{/css/list.css?ver=14}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet'
+          type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.css}">
+    <!-- github acitivity css -->
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" th:href="@{/plugins/styles.css}">
+</head>
+<body>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
+<header>
+    <div class="headerTitle">
+        <span style="margin-right: 4%">To Do List</span>
+        <span style="float: left">
+            <button class="btn toggle" onclick="openNav()">
+                <div class="icon-menu">
+                    <span class="line line-1"></span>
+                    <span class="line line-2"></span>
+                    <span class="line line-3"></span>
+                </div>
+            </button>
+        </span>
+    </div>
+</header>
+
+<div id="main2">
+    <div class="container2" style="margin-top: 0px; background-color: #f6f8fa; margin-bottom: 0px">
+        <header class="header" style="height: 20%; width: 100%">
+            <div class="container" style="margin: 0px 0px 0px 0px; width: 750px;">
+                <img class="profile-image img-responsive pull-left" style="width: 20%; height: 20%"
+                     th:src="@{/images/avatar.png}" alt="Avatar"/>
+                <div class="profile-content pull-left">
+                    <h1 class="name">James Lee</h1>
+                    <h2 class="desc">Web App Developer</h2>
+
+                </div><!--//profile-->
+                <a class="btn btn-cta-primary pull-right" target="_blank"><i class="fa fa-paper-plane"></i> Contact
+                    Me</a>
+            </div><!--//container-->
+        </header><!--//header-->
+
+
+        <div class="w3-bar w3-border w3-dark-grey w3-center">
+            <a href="#" class="tablink w3-bar-item w3-button w3-mobile" onclick="openCity(event, 'TAB1')"
+               style="width:33.33%">Home</a>
+            <a href="#" class="tablink w3-bar-item w3-button w3-mobile" onclick="openCity(event, 'TAB2')"
+               style="width:33.33%">Link 1</a>
+            <a href="#" class="tablink w3-bar-item w3-button w3-mobile" onclick="openCity(event, 'TAB3')"
+               style="width:33.33%">Link 2</a>
+        </div>
+
+        <div id="TAB1" class="TAB">
+            <h1> first Button </h1>
+        </div>
+
+        <div id="TAB2" class="TAB">
+            <h1> Second Button </h1>
+        </div>
+
+        <div id="TAB3" class="TAB">
+            <h1> Three Button </h1>
+        </div>
+    </div>
+</div>
+<div th:replace="layout/footer::footer"></div>
+<script th:src="@{/js/account.js?ver=27}"></script>
+</body>
+</html>

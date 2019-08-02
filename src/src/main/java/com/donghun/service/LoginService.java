@@ -23,7 +23,7 @@ import java.util.*;
 
 /**
  * @author dongh9508
- * @since  2019-06-08
+ * @since 2019-06-08
  */
 @Service
 public class LoginService {
@@ -81,8 +81,7 @@ public class LoginService {
             helper.setFrom(mail.getFrom());
 
             sender.send(message);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -90,9 +89,9 @@ public class LoginService {
     public ResponseEntity<?> updatePassword(PasswordResetDTO form) {
         PasswordResetToken token = null;
 
-        if(tokenRepository.findByToken(form.getToken()) != null) {
+        if (tokenRepository.findByToken(form.getToken()) != null) {
             token = tokenRepository.findByToken(form.getToken());
-            if(token.isExpired()) {
+            if (token.isExpired()) {
                 tokenRepository.delete(token);
                 return new ResponseEntity<>("Token has expired, please request a new password reset.",
                         HttpStatus.BAD_REQUEST);

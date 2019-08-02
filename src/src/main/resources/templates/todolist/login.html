@@ -24,7 +24,7 @@
             <div class="imgcontainer">
                 <img th:src="@{/images/avatar.png}" alt="Avatar" class="avatar">
             </div>
-            <form th:action="@{/login}" method="POST">
+            <form th:action="@{/api/login}" method="POST">
                 <div class="container">
                     <p th:if="${param.error}" style="color: red">
                         아이디 또는 비밀번호를 확인하시길 바랍니다.
@@ -43,7 +43,8 @@
                     <button id="login" class="loginBtn" type="submit">Login</button>
                     <button type="button" class="cancelbtn" onclick="moveRegister()">Register</button>
                     <button onclick="document.getElementById('id01').style.display='block'" type="button"
-                            class="forgotbtn" id="forgotbtnId">Forgot Account?</button>
+                            class="forgotbtn" id="forgotbtnId">Forgot Account?
+                    </button>
                 </div>
             </form>
         </div>
@@ -61,7 +62,8 @@
 
         <div class="w3-bar w3-border-bottom">
             <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'ForgotId')">Forgot Id?</button>
-            <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'ForgotPW')">Forgot Password?</button>
+            <button class="tablink w3-bar-item w3-button" onclick="openCity(event, 'ForgotPW')">Forgot Password?
+            </button>
         </div>
 
         <div id="ForgotId" class="w3-container city">

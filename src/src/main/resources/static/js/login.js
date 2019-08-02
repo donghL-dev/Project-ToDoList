@@ -1,4 +1,3 @@
-
 function moveRegister() {
     location.href = "/register";
 }
@@ -44,15 +43,13 @@ function openCity(evt, cityName) {
 $('#forgot_id_email').keyup(function () {
     var input_email = $('#forgot_id_email').val();
     var re = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-    if(re.test(input_email) == false) {
+    if (re.test(input_email) == false) {
         $("#forgot_email").text('이메일 형식에 맞게 입력하십시오.').css('color', 'red');
         $('#forgot_email').show();
-    }
-    else if(input_email.length === 0) {
+    } else if (input_email.length === 0) {
         $("#forgot_email").text('이메일을 반드시 입력해야 합니다.').css('color', 'red');
         $('#forgot_email').show();
-    }
-    else {
+    } else {
         $.ajax({
             url: "/login/emailcheck",
             type: "POST",
@@ -98,7 +95,7 @@ var email_pw_check = false;
 
 $('#forgot_pw_id').keyup(function () {
     var input_id = $('#forgot_pw_id').val();
-    if(input_id.length > 4) {
+    if (input_id.length > 4) {
         $.ajax({
             url: "/login/idcheck",
             type: "POST",
@@ -119,15 +116,13 @@ $('#forgot_pw_id').keyup(function () {
 $('#forgot_pw_email').keyup(function () {
     var input_email = $('#forgot_pw_email').val();
     var re = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-    if(re.test(input_email) == false) {
+    if (re.test(input_email) == false) {
         $("#forgot_pw_email_vaild").text('이메일 형식에 맞게 입력하십시오.').css('color', 'red');
         $('#forgot_pw_email_vaild').show();
-    }
-    else if(input_email.length === 0) {
+    } else if (input_email.length === 0) {
         $("#forgot_pw_email_vaild").text('이메일을 반드시 입력해야 합니다.').css('color', 'red');
         $('#forgot_pw_email_vaild').show();
-    }
-    else {
+    } else {
         $.ajax({
             url: "/login/emailcheck",
             type: "POST",
@@ -180,15 +175,13 @@ $('#forgot_pw_new').keyup(function () {
     var regExp = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{5,22}$/;
     var password = $('#forgot_pw_new').val();
 
-    if($(this).val().length === 0) {
+    if ($(this).val().length === 0) {
         $("#forgot_pw_new_vaild").text('비밀번호를 반드시 입력해야 합니다.').css('color', 'red');
         $('#forgot_pw_new_vaild').show();
-    }
-    else if(!regExp.test(password) || password.length > 22 || password.length < 5) {
+    } else if (!regExp.test(password) || password.length > 22 || password.length < 5) {
         $('#forgot_pw_new_vaild').text('5~22의 영문 대소문자, 숫자, 특수문자로 사용해야합니다.').css('color', 'red');
         $('#forgot_pw_new_vaild').show();
-    }
-    else {
+    } else {
         $('#forgot_pw_new_vaild').text('사용가능한 비밀번호 입니다.').css('color', 'green');
         $('#forgot_pw_new_vaild').show();
         new_pw_vaild = true;
@@ -199,15 +192,13 @@ $('#forgot_pw_new').keyup(function () {
 $('#forgot_pw_new_check').keyup(function () {
     var new_pw = $('#forgot_pw_new').val();
     var new_pw_confirm = $('#forgot_pw_new_check').val();
-    if($(this).val().length === 0) {
+    if ($(this).val().length === 0) {
         $("#forgot_pw_new_check_vaild").text('반드시 입력해야 합니다.').css('color', 'red');
         $('#forgot_pw_new_check_vaild').show();
-    }
-    else if(new_pw !== new_pw_confirm) {
+    } else if (new_pw !== new_pw_confirm) {
         $('#forgot_pw_new_check_vaild').text('비밀번호가 일치하지 않습니다.').css('color', 'red');
         $('#forgot_pw_new_check_vaild').show();
-    }
-    else {
+    } else {
         $('#forgot_pw_new_check_vaild').text('비밀번호가 일치합니다.').css('color', 'green');
         $('#forgot_pw_new_check_vaild').show();
         new_pw_vaild_check = true;
@@ -220,7 +211,7 @@ $('#forgot_pw_new_Btn').click(function () {
         confirmPassword: $('#forgot_pw_new_check').val(),
         token: $('#token').val()
     });
-    if(new_pw_vaild && new_pw_vaild_check) {
+    if (new_pw_vaild && new_pw_vaild_check) {
         $.ajax({
             url: "/login/reset-password",
             type: "POST",
@@ -235,8 +226,7 @@ $('#forgot_pw_new_Btn').click(function () {
                 alert(parm.responseText);
             }
         });
-    }
-    else {
+    } else {
         alert("비밀번호 불일치 또는 사용불가능한 비밀번호이니, 다시 한 번 확인바랍니다. ")
     }
 });

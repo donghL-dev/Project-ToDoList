@@ -12,12 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.Map;
 
 /**
  * @author dongh9508
- * @since  2019-03-29
+ * @since 2019-03-29
  */
 @Controller
 @RequestMapping("/todolist")
@@ -39,9 +40,9 @@ public class ToDoListController {
     @PostMapping
     public ResponseEntity<?> postToDoList(@RequestBody @Valid ToDoList toDoList, BindingResult result,
                                           @AuthenticationPrincipal org.springframework.security.core.userdetails.User currentUser) {
-        if(result.hasErrors()) {
-           StringBuilder msg = userService.validation(result);
-           return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
+        if (result.hasErrors()) {
+            StringBuilder msg = userService.validation(result);
+            return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
         }
 
         User user = userService.findUserId(currentUser.getUsername());
@@ -50,15 +51,15 @@ public class ToDoListController {
     }
 
     @PutMapping("/status/{idx}")
-    public ResponseEntity<?> putStatus(@PathVariable("idx")Integer idx) {
+    public ResponseEntity<?> putStatus(@PathVariable("idx") Integer idx) {
         toDoListService.putStatusToDoList(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
     @PutMapping("/{idx}")
-    public ResponseEntity<?> putDescription(@PathVariable("idx")Integer idx, @RequestBody @Valid ToDoList toDoList,
+    public ResponseEntity<?> putDescription(@PathVariable("idx") Integer idx, @RequestBody @Valid ToDoList toDoList,
                                             BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             StringBuilder msg = userService.validation(bindingResult);
             return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
         }
@@ -68,7 +69,7 @@ public class ToDoListController {
     }
 
     @DeleteMapping("/{idx}")
-    public ResponseEntity<?> deleteToDoList(@PathVariable("idx")Integer idx) {
+    public ResponseEntity<?> deleteToDoList(@PathVariable("idx") Integer idx) {
         toDoListService.deleteToDoList(idx);
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }

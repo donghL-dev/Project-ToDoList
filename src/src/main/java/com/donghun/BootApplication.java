@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
 
 /**
  * @author dongh9508
- * @since  2019-03-29
+ * @since 2019-03-29
  */
 @SpringBootApplication
 public class BootApplication {

@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * @author dongh9508
- * @since  2019-03-29
+ * @since 2019-03-29
  */
 @Service
 public class UserService implements UserDetailsService {
@@ -56,7 +56,7 @@ public class UserService implements UserDetailsService {
 
         List<ObjectError> list = bindingResult.getAllErrors();
         StringBuilder msg = new StringBuilder();
-        for(ObjectError error : list)
+        for (ObjectError error : list)
             msg.append(error.getDefaultMessage()).append("\n");
         return msg;
     }

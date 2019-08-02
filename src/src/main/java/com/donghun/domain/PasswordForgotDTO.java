@@ -10,14 +10,14 @@ import javax.validation.constraints.Pattern;
 
 /**
  * @author dongh9508
- * @since  2019-06-10
+ * @since 2019-06-10
  */
 @Getter
 @Setter
 public class PasswordForgotDTO {
 
     @NotBlank(message = "아이디를 입력하세요.")
-    @Length(min = 4, max=12)
+    @Length(min = 4, max = 12)
     @Pattern(regexp = "^[a-z0-9]{4,12}$", message = "아이디 구성을 올바르게 하십시오.")
     private String id;
 

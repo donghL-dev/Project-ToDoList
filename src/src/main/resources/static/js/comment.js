@@ -1,16 +1,15 @@
-
-function Comment (commentDTO) {
+function Comment(commentDTO) {
     this.idx = commentDTO['commentIdx'];
     this.content = commentDTO['content'];
     this.dateTime = commentDTO['dateTime'];
     this.modifyTime = commentDTO['modifyTime'];
 
-    this.li_style_tag = function() {
-        var li = document.createElement( 'li' );
+    this.li_style_tag = function () {
+        var li = document.createElement('li');
         li.style.marginBottom = "1%";
         li.id = "comment_li" + this.idx;
 
-        var h4 = document.createElement( 'h4' );
+        var h4 = document.createElement('h4');
         h4.style.width = "500px";
         h4.style.padding = "10px 13px 10px";
         h4.id = "comment_content";
@@ -18,7 +17,7 @@ function Comment (commentDTO) {
 
         var comment_content = document.createTextNode(commentDTO['content']);
         h4.appendChild(comment_content);
-        li.appendChild( h4 );
+        li.appendChild(h4);
 
         var h5 = document.createElement('h5');
         h5.style.cssFloat = "right";
@@ -30,7 +29,7 @@ function Comment (commentDTO) {
 
         var div = document.createElement('div');
         div.style.cssFloat = "right";
-        div.style.marginBottom ="4px";
+        div.style.marginBottom = "4px";
 
         var button1 = document.createElement('button');
         button1.style.width = "35px";
@@ -43,7 +42,7 @@ function Comment (commentDTO) {
         i1.appendChild(document.createTextNode("check_box_outline_blank"));
 
         var button2 = document.createElement('button');
-        button2.style.width ="35px";
+        button2.style.width = "35px";
         button2.className = "comment_delete";
         button2.value = JSON.stringify(commentDTO['commentIdx']);
 
@@ -83,7 +82,7 @@ $('.comment_insert').click(function () {
     var jsonData = JSON.stringify({
         content: $('#new-commnet' + $(this).val()).val(),
         todolistIdx: $(this).val(),
-        status : false
+        status: false
     });
     $(id).val('');
     $.ajax({
@@ -102,7 +101,7 @@ $('.comment_insert').click(function () {
     });
 });
 
-$(document).on("click",".comment_edit",function() {
+$(document).on("click", ".comment_edit", function () {
     var comment_content = $(this).parent().parent().find('#comment_content');
     var comment_days = $(this).parent().parent().find('#comment_days');
     var comment_delete_btn = $(this).parent().find('.comment_delete');
@@ -110,7 +109,7 @@ $(document).on("click",".comment_edit",function() {
     var date = new Date();
     var backup_content = comment_content.text();
 
-    comment_days.text(date.getFullYear() + "-" + ( date.getMonth() + 1 > 9 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1)  ) + "-" + date.getDate());
+    comment_days.text(date.getFullYear() + "-" + (date.getMonth() + 1 > 9 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1)) + "-" + date.getDate());
 
     comment_content.attr('contenteditable', true);
     comment_content.trigger('focus');
@@ -133,11 +132,11 @@ $(document).on("click",".comment_edit",function() {
 
     editBtn.replaceWith(button);
 
-    $(document).on("click", ".comment_edit2", function() {
+    $(document).on("click", ".comment_edit2", function () {
         var editBtn = $(this);
         var content = comment_content.text();
 
-        if(content.length > 0 && content.length < 10) {
+        if (content.length > 0 && content.length < 10) {
 
             var jsonData = JSON.stringify({
                 content: comment_content.text()
@@ -173,8 +172,7 @@ $(document).on("click",".comment_edit",function() {
             comment_delete_btn.css('visibility', 'visible');
             comment_checkbox_btn.css('visibility', 'visible');
             comment_content.attr('contenteditable', false);
-        }
-        else {
+        } else {
             alert("Comment는 1~9 내에서 작성하셔야 합니다.");
             comment_content.text(backup_content);
 
@@ -195,8 +193,8 @@ $(document).on("click",".comment_edit",function() {
     });
 });
 
-$(document).on("click",".comment_delete",function() {
-    var comment_li = $(this).parent().parent().parent().find('#comment_li'+$(this).val());
+$(document).on("click", ".comment_delete", function () {
+    var comment_li = $(this).parent().parent().parent().find('#comment_li' + $(this).val());
     $.ajax({
         url: "/comment/" + $(this).val(),
         type: "DELETE",
@@ -209,7 +207,7 @@ $(document).on("click",".comment_delete",function() {
     });
 });
 
-$(document).on("click",".checkbox3",function() {
+$(document).on("click", ".checkbox3", function () {
     var editbtn = $(this).parent().find('.comment_edit');
     var checkboxbtn = $(this);
     var comment_content = $(this).parent().parent().find('#comment_content');
@@ -245,7 +243,7 @@ $(document).on("click",".checkbox3",function() {
 
 });
 
-$(document).on("click",".checkbox4",function() {
+$(document).on("click", ".checkbox4", function () {
     var editbtn = $(this).parent().find('.comment_edit');
     var checkboxbtn = $(this);
     var comment_content = $(this).parent().parent().find('#comment_content');

@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * @author dongh9508
- * @since  2019-04-12
+ * @since 2019-04-12
  */
 @Service
 public class CommentService {
@@ -25,7 +25,7 @@ public class CommentService {
     public StringBuilder validation(BindingResult bindingResult) {
         List<ObjectError> list = bindingResult.getAllErrors();
         StringBuilder msg = new StringBuilder();
-        for(ObjectError error : list)
+        for (ObjectError error : list)
             msg.append(error.getDefaultMessage()).append("\n");
         return msg;
     }

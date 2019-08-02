@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author dongh9508
- * @since  2019-03-29
+ * @since 2019-03-29
  */
 @Service
 public class ToDoListService {
@@ -19,9 +19,9 @@ public class ToDoListService {
     @Autowired
     private ToDoListRepository toDoListRepository;
 
-    public List<ToDoList> findToDoList(User user){
+    public List<ToDoList> findToDoList(User user) {
         List<ToDoList> lists = toDoListRepository.findByUserOrderByIdx(user);
-        for(ToDoList list : lists) {
+        for (ToDoList list : lists) {
             Collections.sort(list.getComments());
             list.setComments(list.getComments());
         }

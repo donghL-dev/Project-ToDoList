@@ -232,9 +232,9 @@ public class ForgotAccountTest {
 
         // 비밀번호가 공백일 때의 테스트.
         mockMvc.perform(post("/login/reset-password")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(resetDTO)))
-                        .andExpect(status().isBadRequest());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(resetDTO)))
+                .andExpect(status().isBadRequest());
 
         resetDTO.setPassword("1234asd");
         resetDTO.setConfirmPassword("1234asd");
@@ -304,7 +304,6 @@ public class ForgotAccountTest {
                 .content(objectMapper.writeValueAsString(resetDTO)))
                 .andExpect(status().isBadRequest());
     }
-
 
 
     @Test // 비밀번호를 재설정 할 때, 토큰과 입력한 비밀번호 모두 올바를 때의 정상적인 재설정 테스트.

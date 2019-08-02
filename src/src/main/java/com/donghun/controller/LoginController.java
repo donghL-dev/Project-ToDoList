@@ -20,7 +20,7 @@ import java.util.*;
 
 /**
  * @author dongh9508
- * @since  2019-03-29
+ * @since 2019-03-29
  */
 @Controller
 public class LoginController {
@@ -60,7 +60,7 @@ public class LoginController {
     public ResponseEntity<?> emailSendId(@RequestBody String email) {
         String username = null;
 
-        if(userService.findUserEmail(email) != null)
+        if (userService.findUserEmail(email) != null)
             username = userService.findUserEmail(email).getId();
         else
             return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
@@ -72,19 +72,18 @@ public class LoginController {
     @PostMapping("/login/forgot-password")
     public ResponseEntity<?> emailSendPW(@RequestBody @Valid PasswordForgotDTO ForgotDTO,
                                          BindingResult result, HttpServletRequest request) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             StringBuilder msg = userService.validation(result);
             return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
         }
 
         User user = null;
 
-        if(userService.findUserEmail(ForgotDTO.getEmail()) != null && userService.findUserId(ForgotDTO.getId()) != null) {
+        if (userService.findUserEmail(ForgotDTO.getEmail()) != null && userService.findUserId(ForgotDTO.getId()) != null) {
             user = userService.findUserEmail(ForgotDTO.getEmail());
-            if(!user.getId().equals(userService.findUserId(ForgotDTO.getId()).getId()))
+            if (!user.getId().equals(userService.findUserId(ForgotDTO.getId()).getId()))
                 return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
-        }
-        else {
+        } else {
             return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
         }
 
@@ -104,12 +103,12 @@ public class LoginController {
 
         PasswordResetToken resetToken = null;
 
-        if(tokenRepository.findByToken(token) != null)
+        if (tokenRepository.findByToken(token) != null)
             resetToken = tokenRepository.findByToken(token);
 
-        if(resetToken == null) {
+        if (resetToken == null) {
             model.addAttribute("error", "Could not find password reset token.");
-        } else if(resetToken.isExpired()) {
+        } else if (resetToken.isExpired()) {
             model.addAttribute("error", "Token has expired, please request a new password reset.");
         } else {
             model.addAttribute("token", resetToken.getToken());
@@ -122,10 +121,10 @@ public class LoginController {
     @Transactional
     public ResponseEntity<?> handlePasswordReset(@RequestBody @Valid PasswordResetDTO form, BindingResult result) {
 
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             StringBuilder msg = userService.validation(result);
             return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
-        } else if(!form.getPassword().equals(form.getConfirmPassword())) {
+        } else if (!form.getPassword().equals(form.getConfirmPassword())) {
             return new ResponseEntity<>("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
         }
 

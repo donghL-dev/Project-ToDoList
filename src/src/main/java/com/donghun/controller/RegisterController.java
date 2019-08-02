@@ -15,7 +15,7 @@ import javax.validation.Valid;
 
 /**
  * @author dongh9508
- * @since  2019-03-29
+ * @since 2019-03-29
  */
 @Controller
 public class RegisterController {
@@ -31,7 +31,7 @@ public class RegisterController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             StringBuilder msg = userService.validation(bindingResult);
             return new ResponseEntity<>(msg.toString(), HttpStatus.BAD_REQUEST);
         }
@@ -39,9 +39,9 @@ public class RegisterController {
         String inputId = userDTO.getId();
         String inputEmail = userDTO.getEmail();
 
-        if(userService.findUserId(inputId) != null)
+        if (userService.findUserId(inputId) != null)
             return new ResponseEntity<>("이미 존재하는 아이디입니다.", HttpStatus.FORBIDDEN);
-        else if(userService.findUserEmail(inputEmail) != null)
+        else if (userService.findUserEmail(inputEmail) != null)
             return new ResponseEntity<>("이미 존재하는 이메일입니다.", HttpStatus.FORBIDDEN);
 
         userService.DTOsave(userDTO);

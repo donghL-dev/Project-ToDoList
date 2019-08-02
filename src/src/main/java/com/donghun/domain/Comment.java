@@ -8,12 +8,9 @@ import java.time.LocalDateTime;
 
 /**
  * @author dongh9508
- * @since  2019-04-12
+ * @since 2019-04-12
  */
 @Entity
-@Setter
-@Getter
-@ToString
 @Data
 @Table
 @NoArgsConstructor

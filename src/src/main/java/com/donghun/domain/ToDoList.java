@@ -1,9 +1,6 @@
 package com.donghun.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -15,12 +12,11 @@ import java.util.List;
 
 /**
  * @author dongh9508
- * @since  2019-03-29
+ * @since 2019-03-29
  */
 @Entity
 @Table
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class ToDoList implements Serializable {
 
