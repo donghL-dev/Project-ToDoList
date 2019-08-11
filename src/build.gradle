@@ -22,12 +22,29 @@ idea {
     }
 }
 
+
 group = 'com.donghun'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+}
+
+bootRun {
+    main = 'com.donghun.BootApplication'
+}
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.donghun.BootApplication'
+    }
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
 }
 
 dependencies {
@@ -37,6 +54,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile("org.springframework.boot:spring-boot-starter-security")
     compile('org.springframework.boot:spring-boot-starter-validation')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.webjars:bootstrap:3.3.7'
     implementation 'org.webjars:jquery:3.2.1'
@@ -45,12 +63,9 @@ dependencies {
     runtime('mysql:mysql-connector-java')
     runtime('org.springframework.boot:spring-boot-devtools')
     compileOnly('org.projectlombok:lombok')
+    annotationProcessor 'org.projectlombok:lombok'
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.springframework.security:spring-security-test')
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    compile('org.springframework.boot:spring-boot-starter-web'){
-        exclude module: "jackson-databind"
-    }
-
     compile('org.springframework.boot:spring-boot-starter-hateoas')
 }

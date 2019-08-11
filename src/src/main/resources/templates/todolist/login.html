@@ -24,7 +24,7 @@
             <div class="imgcontainer">
                 <img th:src="@{/images/avatar.png}" alt="Avatar" class="avatar">
             </div>
-            <form th:action="@{/api/login}" method="POST">
+            <form th:action="@{/login}" method="POST">
                 <div class="container">
                     <p th:if="${param.error}" style="color: red">
                         아이디 또는 비밀번호를 확인하시길 바랍니다.
