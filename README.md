@@ -44,9 +44,9 @@ Prjoect - To Do List
     $ git clone https://github.com/donghL-dev/Project-ToDoList.git
     ```
 
-* 프로젝트 내 Project-Matching\src\main\resources 경로에 `application.yml` 생성.
+* 프로젝트 내 src\src\main\resources 경로에 `application.yml` 생성.
 
-    * 밑의 양식대로 내용을 채운 뒤, `application.yml` 내용 삽입.
+    * 밑의 양식대로 내용을 채운 뒤, `application.yml`에 삽입.
     <br>
 
     ```yml
@@ -63,7 +63,7 @@ Prjoect - To Do List
 
 * IntelliJ IDEA(>= 2018.3)에서 해당 프로젝트를 `Open`
 
-    * 또는 프로젝트 경로에서 터미널에서 다음 명령어를 실행.
+    * 또는 터미널을 열어서 프로젝트 경로에 진입해서 다음 명령어를 실행.
 
     * Windows 10
 
