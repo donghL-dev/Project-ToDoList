@@ -21,6 +21,7 @@ logback-spring.xml
 file.xml
 AccessLogConfig.java
 HttpsConfig.jaava
+logback-access.xml
 
 # End of https://www.gitignore.io/api/cloud9
 

@@ -27,6 +27,58 @@ Prjoect - To Do List
 |DataBase |MySQL Server 5.7|
 |Build Tool |Gradle 5.2.1|
 
+## 실행 방법
+<details><summary>세부정보</summary>
+
+* 준비사항.
+    
+    * Gradle or IntelliJ IDEA
+
+    * JDK (>= 1.8)
+
+    * Spring Boot (>= 2.x)
+
+* 저장소를 `clone`
+
+    ```bash
+    $ git clone https://github.com/donghL-dev/Project-ToDoList.git
+    ```
+
+* 프로젝트 내 Project-Matching\src\main\resources 경로에 `application.yml` 생성.
+
+    * 밑의 양식대로 내용을 채운 뒤, `application.yml` 내용 삽입.
+    <br>
+
+    ```yml
+    spring:
+        datasource:
+            url: jdbc:mysql://localhost/본인_DB
+            username: 본인_DB_User
+            password: 본인_DB_User_Password
+            driver-class-name: com.mysql.jdbc.Driver
+        jpa:
+            hibernate:
+            ddl-auto: create
+    ```
+
+* IntelliJ IDEA(>= 2018.3)에서 해당 프로젝트를 `Open`
+
+    * 또는 프로젝트 경로에서 터미널에서 다음 명령어를 실행.
+
+    * Windows 10
+
+        ```bash
+        $ gradlew bootRun
+        ```
+
+    * Ubuntu 18.04
+
+        ```bash
+        $ ./gradlew bootRun
+        ```
+
+</details>
+
 ## 주요기능 
 
  * [확인](https://github.com/dongh9508/Project-ToDoList/tree/master/image/MainFunction)
