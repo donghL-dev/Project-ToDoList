@@ -4,7 +4,7 @@ Prjoect - To Do List
 
 * 이 저장소는 To Do List Web Application을 개발하면서 소스코드 관리 및 버전관리를 위한 저장소입니다.
 
-* 프로젝트 배포 URL : https://donghun-dev.kro.kr:8081
+* 프로젝트 배포 URL : https://donghun.dev:8081
 
 * 목적 및 인원
   
@@ -43,6 +43,11 @@ Prjoect - To Do List
     ```bash
     $ git clone https://github.com/donghL-dev/Project-ToDoList.git
     ```
+* 프로젝트 내 Project-Matching\src\main\java\com\matching\config 경로에 `HttpConfig.java` 삭제 또는 내용 주석처리.
+
+* DB는 MySQL을 쓴다고 가정.
+
+    * 다른 DB를 사용한다면, 그 DB에 맞게 설정을 해야함.
 
 * 프로젝트 내 src\src\main\resources 경로에 `application.yml` 생성.
 
