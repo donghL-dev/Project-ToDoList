@@ -4,8 +4,6 @@ Prjoect - To Do List
 
 * 이 저장소는 To Do List Web Application을 개발하면서 소스코드 관리 및 버전관리를 위한 저장소입니다.
 
-* 프로젝트 배포 URL : [https://deploy.donghun.dev:8081](https://deploy.donghun.dev:8081)
-
 * 목적
   
   * Spring Boot & JPA 학습 및 Web Application(To Do List) 개발.
